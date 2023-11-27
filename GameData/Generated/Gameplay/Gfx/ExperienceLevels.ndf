@@ -1,0 +1,142 @@
+// Ne pas éditer, ce fichier est auto-généré !
+
+
+export ExperienceLevelsPackDescriptor_XP_pack_SF is TExperienceLevelsPackDescriptor
+(
+    DescriptorId = GUID:{202a6232-2d90-4933-9ac2-dc78a4a98883}
+    ExperienceLevelsDescriptors = [
+        ExperienceLevelDescriptor_XP_pack_SF_0 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{f92833e1-4803-436d-8e9a-c38fc8f7e686}
+            LocalizationToken = "EXPLEVEL0"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 0.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_RoF_moins_20pourcent,
+                ~/UnitEffect_Precision_moins_20,
+                ~/UnitEffect_Effet_Suppress_Recu_133pourcent,
+            ]
+            NameForDebug = "Exemple_XP_niveau_0"
+        ),
+        ExperienceLevelDescriptor_XP_pack_SF_1 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{17f4349e-13d9-4dbe-9540-cdaaae269deb}
+            LocalizationToken = "EXPLEVEL1"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 2.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_Ajoute_Tag_xp_regular,
+            ]
+            NameForDebug = "Exemple_XP_niveau_1"
+        ),
+        ExperienceLevelDescriptor_XP_pack_SF_2 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{a429d409-5b21-4762-8a5f-965c5d0e5d91}
+            LocalizationToken = "EXPLEVEL2"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 4.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_Ajoute_Tag_xp_veteran,
+                ~/UnitEffect_Precision_plus_10,
+                ~/UnitEffect_RoF_plus_15pourcent,
+                ~/UnitEffect_Effet_Suppress_Recu_66pourcent,
+                ~/UnitEffect_Regen_suppress_veteran,
+            ]
+            NameForDebug = "Exemple_XP_niveau_2"
+        ),
+        ExperienceLevelDescriptor_XP_pack_SF_3 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{072b4236-fef4-42b6-b460-a6901f29fc3a}
+            LocalizationToken = "EXPLEVEL3"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 6.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_Ajoute_Tag_xp_elite,
+                ~/UnitEffect_Precision_plus_15,
+                ~/UnitEffect_RoF_plus_20pourcent,
+                ~/UnitEffect_Effet_Suppress_Recu_50pourcent,
+                ~/UnitEffect_Regen_suppress_elite,
+            ]
+            NameForDebug = "Exemple_XP_niveau_3"
+        ),
+    ]
+    NameForDebug = "XP_pack_SF"
+)
+export ExperienceLevelsPackDescriptor_XP_pack_simple_v2 is TExperienceLevelsPackDescriptor
+(
+    DescriptorId = GUID:{2b8d42aa-3c98-436e-8e36-1ac397db73e4}
+    ExperienceLevelsDescriptors = [
+        ExperienceLevelDescriptor_XP_pack_simple_v2_0 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{92499103-d7f2-4e44-b3cf-7ae9236e13e0}
+            LocalizationToken = "EXPLEVEL0"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 0.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_RoF_moins_20pourcent,
+                ~/UnitEffect_Precision_moins_20,
+                ~/UnitEffect_Effet_Suppress_Recu_133pourcent,
+            ]
+            NameForDebug = "Exemple_XP_niveau_0"
+        ),
+        ExperienceLevelDescriptor_XP_pack_simple_v2_1 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{7e62122a-e739-4ea1-b07c-d1789223b083}
+            LocalizationToken = "EXPLEVEL1"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 6.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_Ajoute_Tag_xp_regular,
+                ~/UnitEffect_Regen_suppress_regular,
+            ]
+            NameForDebug = "Exemple_XP_niveau_1"
+        ),
+        ExperienceLevelDescriptor_XP_pack_simple_v2_2 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{787d7798-a78e-4a27-80c1-4a0597833e5a}
+            LocalizationToken = "EXPLEVEL2"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 8.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_Ajoute_Tag_xp_veteran,
+                ~/UnitEffect_Precision_plus_5,
+                ~/UnitEffect_RoF_plus_5pourcent,
+                ~/UnitEffect_Effet_Suppress_Recu_vet2,
+                ~/UnitEffect_Regen_suppress_veteran,
+            ]
+            NameForDebug = "Exemple_XP_niveau_2"
+        ),
+        ExperienceLevelDescriptor_XP_pack_simple_v2_3 is TExperienceLevelDescriptor
+        (
+            DescriptorId = GUID:{71588519-2701-4a5f-94ef-0172f8437fab}
+            LocalizationToken = "EXPLEVEL3"
+            ThresholdAdditionalValue = 0.0
+            ThresholdPriceMultiplier = 12.0
+            IconsByNationality = [
+            ]
+            LevelEffectsPacks = [
+                ~/UnitEffect_Ajoute_Tag_xp_elite,
+                ~/UnitEffect_Precision_plus_10,
+                ~/UnitEffect_RoF_plus_10pourcent,
+                ~/UnitEffect_Effet_Suppress_Recu_vet3,
+                ~/UnitEffect_Regen_suppress_elite,
+            ]
+            NameForDebug = "Exemple_XP_niveau_3"
+        ),
+    ]
+    NameForDebug = "XP_pack_simple_v2"
+)

@@ -1,0 +1,14 @@
+export Modele_M1A1_Abrams_reco_US is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/US/Char/M1A1_Abrams_RECO/M1A1_Abrams.Ase2NdfBin'
+)
+
+export Modele_M1A1_Abrams_reco_US_MID is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/US/Char/M1A1_Abrams_RECO/M1A1_Abrams.Ase2NdfBin'
+)
+
+export Modele_M1A1_Abrams_reco_US_LOW is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/US/Char/M1A1_Abrams_RECO/M1A1_Abrams.Ase2NdfBin'
+)

@@ -1,0 +1,12 @@
+export TransactionBase is TNDFTransactionFileList
+(
+    Files =
+    [
+        'CommonData:/Gameplay/TestIA/TestUnits/TestUnits_Resources.ndf',
+        'GameData:/Gameplay/Gfx/Units/DepictionAnimationResources.ndf',
+        'GameData:/Gameplay/Gfx/Units/PylonsModelResources.ndf',
+        'GameData:/Gameplay/Gfx/Units/SubDepictionModelResources.ndf',
+        'GameData:/Gameplay/Gfx/Units/StrategicPawnModelResources.ndf',
+        'GameData:/Gameplay/Gfx/Units/Tests/TestDepiction.ndf',
+    ]
+)

@@ -1,0 +1,15 @@
+
+WorldInterfaceTactical is TWorldInterfaceDescriptor
+(
+    World3D = $/M3D/Scene/DefaultWorld
+    HelperVisibility = ~/World_Constante.HelperVisibility
+    GamePhaseManagerDescriptor = ~/tacticalGamePhaseManagerDescriptor
+    ZoneManagerDescriptors =
+    [
+        ~/deploiementZoneManagerDescriptor,
+        ~/commandementZoneManagerDescriptor,
+        ~/zoneManagerForIAStratDescriptor,
+    ]
+
+    SoundAndMusicSwitchDescriptor = soundAndMusic
+)

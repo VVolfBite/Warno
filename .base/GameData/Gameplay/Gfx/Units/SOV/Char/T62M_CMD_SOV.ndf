@@ -1,0 +1,14 @@
+export Modele_T62M_CMD_SOV is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/URSS/Char/T62M_CMD/T62M_CMD.Ase2NdfBin'
+)
+
+export Modele_T62M_CMD_SOV_MID is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/URSS/Char/T62M_CMD/T62M_CMD.Ase2NdfBin'
+)
+
+export Modele_T62M_CMD_SOV_LOW is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/URSS/Char/T62M_CMD/T62M_CMD.Ase2NdfBin'
+)

@@ -1,0 +1,8 @@
+private reinforcementManager is TReinforcementManager
+(
+    ReinforcementColor = RGBA[255,255,255,255]
+    RoadSnapDistance = 500 * OneMeterInGameUnits
+    LandCorridorTextOffset = 5000
+    AerialCorridorTextOffset = 5000
+    MaritimeCorridorTextOffset = 5000
+)

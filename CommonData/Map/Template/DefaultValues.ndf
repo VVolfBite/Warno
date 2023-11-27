@@ -1,0 +1,16 @@
+Juncture is TBaseClass
+(
+    Tactic        is 0
+    Strategic     is 1
+    OutGame       is 2
+)
+
+DefaultValues is TBaseClass
+(
+    private CellSize                is 655360
+    private MapDirectoryBase        is 'GameData:/Map/Scenario/'
+    private DatasMapDirectoryBase   is 'DatasMap:/Output/'
+    private MapInfoPath             is DatasMapDirectoryBase + 'MapInfo.IA'
+
+    private NbCaseHighPerCaseLow    is 2
+)

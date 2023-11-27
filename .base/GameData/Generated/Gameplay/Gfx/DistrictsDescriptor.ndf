@@ -1,0 +1,307 @@
+// Ne pas éditer, ce fichier est auto-généré !
+
+
+export Descriptor_District_Quartier_Gros is TEntityDescriptor(
+    DescriptorId        = GUID:{c3bee1ea-9a61-47ce-8e66-31c571c362ae}
+    ClassNameForDebug   = 'Quartier_Gros'
+    ModulesDescriptors  =
+    [
+        TTypeUnitModuleDescriptor
+        (
+        ),
+        ~/BuildingTagsModuleDescriptor,
+        TFlagsModuleDescriptor
+        (
+            InitialFlagSet =
+            [
+                Flag_Detectable,
+                Flag_Batiment,
+            ]
+        ),
+        ~/DistrictModuleDescriptor,
+        TDistrictUnitsContainerModuleDescriptor
+        (
+            NbSlots                         = 4
+            AllowedTagSet                   = [
+                "Inf_quartier_ok",
+            ]
+        ),
+        TDynamicTerrainModuleDescriptor
+        (
+            TerrainToApplyOnInit  = ETerrainType/Batiment
+            TerrainToApplyOnDeath = ETerrainType/Ruin
+            OnlyOnProduction = False
+        ),
+        ~/InflammableModuleDescriptorDistrict,
+        ~/DistrictPositionModuleDescriptor,
+        TBaseDamageModuleDescriptor
+        (
+            MaxPhysicalDamages = 45
+            MaxSuppressionDamages = ~/Building_MaxSuppressionDamages
+            MaxStunDamages = ~/Building_MaxStunDamages
+        ),
+        TDamageModuleDescriptor
+        (
+            SuppressDamagesRegenRatio = ~/Building_SuppressDamagesRegenRatioList
+            StunDamagesRegen = ~/Building_StunDamagesRegen
+            BlindageProperties = TBlindageProperties
+            (
+                ArmorDescriptorFront = ArmorDescriptor_Batiment_1
+                ArmorDescriptorSides = ArmorDescriptor_Batiment_1
+                ArmorDescriptorRear = ArmorDescriptor_Batiment_1
+                ArmorDescriptorTop = ArmorDescriptor_Batiment_1
+            )
+            KillWhenDamagesReachMax = True
+            HitRollSize = 5.0
+            HitRollECM = 0.0
+            AutoOrientation = False
+            UseTopArmorAgainstFire = True
+        ),
+        ~/DistrictSelectionModuleDescriptor,
+        TShootingPointsModuleDescriptor(),
+        ApparenceModel is ~/DistrictApparenceModelModuleDescriptor,
+        ~/LinkTeamModuleDescriptor,
+        ~/DebugModuleDescriptor,
+        TIAStratModuleDescriptor
+        (
+            DatabaseId = 1
+            GameplayBehavior = EGameplayBehavior/Nothing
+        ),
+        TCadavreGeneratorModuleDescriptorUnit( CadavreDescriptor = ~/Descriptor_UnitCadavre_Quartier_Gros ),
+        TMinimapDisplayModuleDescriptor
+        (
+            Texture = "Texture_Minimap_Unit_inf"
+            FollowUnitOrientation = True
+        ),
+        ~/PackSignauxModuleDescriptor,
+        ~/TargetDataModuleDescriptor,
+    ]
+)
+export Descriptor_District_Quartier_HLM is TEntityDescriptor(
+    DescriptorId        = GUID:{97cc18e2-21f5-4c6d-b0ea-82db7b12ca41}
+    ClassNameForDebug   = 'Quartier_HLM'
+    ModulesDescriptors  =
+    [
+        TTypeUnitModuleDescriptor
+        (
+        ),
+        ~/BuildingTagsModuleDescriptor,
+        TFlagsModuleDescriptor
+        (
+            InitialFlagSet =
+            [
+                Flag_Detectable,
+                Flag_Batiment,
+            ]
+        ),
+        ~/DistrictModuleDescriptor,
+        TDistrictUnitsContainerModuleDescriptor
+        (
+            NbSlots                         = 4
+            AllowedTagSet                   = [
+                "Inf_quartier_ok",
+            ]
+        ),
+        TDynamicTerrainModuleDescriptor
+        (
+            TerrainToApplyOnInit  = ETerrainType/Batiment
+            TerrainToApplyOnDeath = ETerrainType/Ruin
+            OnlyOnProduction = False
+        ),
+        ~/InflammableModuleDescriptorDistrict,
+        ~/DistrictPositionModuleDescriptor,
+        TBaseDamageModuleDescriptor
+        (
+            MaxPhysicalDamages = 90
+            MaxSuppressionDamages = ~/Building_MaxSuppressionDamages
+            MaxStunDamages = ~/Building_MaxStunDamages
+        ),
+        TDamageModuleDescriptor
+        (
+            SuppressDamagesRegenRatio = ~/Building_SuppressDamagesRegenRatioList
+            StunDamagesRegen = ~/Building_StunDamagesRegen
+            BlindageProperties = TBlindageProperties
+            (
+                ArmorDescriptorFront = ArmorDescriptor_Batiment_1
+                ArmorDescriptorSides = ArmorDescriptor_Batiment_1
+                ArmorDescriptorRear = ArmorDescriptor_Batiment_1
+                ArmorDescriptorTop = ArmorDescriptor_Batiment_1
+            )
+            KillWhenDamagesReachMax = False
+            HitRollSize = 5.0
+            HitRollECM = 0.0
+            AutoOrientation = False
+            UseTopArmorAgainstFire = True
+        ),
+        ~/DistrictSelectionModuleDescriptor,
+        TShootingPointsModuleDescriptor(),
+        ApparenceModel is ~/DistrictApparenceModelModuleDescriptor,
+        ~/LinkTeamModuleDescriptor,
+        ~/DebugModuleDescriptor,
+        TIAStratModuleDescriptor
+        (
+            DatabaseId = 1
+            GameplayBehavior = EGameplayBehavior/Nothing
+        ),
+        TCadavreGeneratorModuleDescriptorUnit( CadavreDescriptor = ~/Descriptor_UnitCadavre_Quartier_HLM ),
+        TMinimapDisplayModuleDescriptor
+        (
+            Texture = "Texture_Minimap_Unit_inf"
+            FollowUnitOrientation = True
+        ),
+        ~/PackSignauxModuleDescriptor,
+        ~/TargetDataModuleDescriptor,
+    ]
+)
+export Descriptor_District_Quartier_Moyen is TEntityDescriptor(
+    DescriptorId        = GUID:{b48192ea-4d1e-491b-a8a6-cb1244251f58}
+    ClassNameForDebug   = 'Quartier_Moyen'
+    ModulesDescriptors  =
+    [
+        TTypeUnitModuleDescriptor
+        (
+        ),
+        ~/BuildingTagsModuleDescriptor,
+        TFlagsModuleDescriptor
+        (
+            InitialFlagSet =
+            [
+                Flag_Detectable,
+                Flag_Batiment,
+            ]
+        ),
+        ~/DistrictModuleDescriptor,
+        TDistrictUnitsContainerModuleDescriptor
+        (
+            NbSlots                         = 4
+            AllowedTagSet                   = [
+                "Inf_quartier_ok",
+            ]
+        ),
+        TDynamicTerrainModuleDescriptor
+        (
+            TerrainToApplyOnInit  = ETerrainType/Batiment
+            TerrainToApplyOnDeath = ETerrainType/Ruin
+            OnlyOnProduction = False
+        ),
+        ~/InflammableModuleDescriptorDistrict,
+        ~/DistrictPositionModuleDescriptor,
+        TBaseDamageModuleDescriptor
+        (
+            MaxPhysicalDamages = 15
+            MaxSuppressionDamages = ~/Building_MaxSuppressionDamages
+            MaxStunDamages = ~/Building_MaxStunDamages
+        ),
+        TDamageModuleDescriptor
+        (
+            SuppressDamagesRegenRatio = ~/Building_SuppressDamagesRegenRatioList
+            StunDamagesRegen = ~/Building_StunDamagesRegen
+            BlindageProperties = TBlindageProperties
+            (
+                ArmorDescriptorFront = ArmorDescriptor_Batiment_1
+                ArmorDescriptorSides = ArmorDescriptor_Batiment_1
+                ArmorDescriptorRear = ArmorDescriptor_Batiment_1
+                ArmorDescriptorTop = ArmorDescriptor_Batiment_1
+            )
+            KillWhenDamagesReachMax = True
+            HitRollSize = 5.0
+            HitRollECM = 0.0
+            AutoOrientation = False
+            UseTopArmorAgainstFire = True
+        ),
+        ~/DistrictSelectionModuleDescriptor,
+        TShootingPointsModuleDescriptor(),
+        ApparenceModel is ~/DistrictApparenceModelModuleDescriptor,
+        ~/LinkTeamModuleDescriptor,
+        ~/DebugModuleDescriptor,
+        TIAStratModuleDescriptor
+        (
+            DatabaseId = 1
+            GameplayBehavior = EGameplayBehavior/Nothing
+        ),
+        TCadavreGeneratorModuleDescriptorUnit( CadavreDescriptor = ~/Descriptor_UnitCadavre_Quartier_Moyen ),
+        TMinimapDisplayModuleDescriptor
+        (
+            Texture = "Texture_Minimap_Unit_inf"
+            FollowUnitOrientation = True
+        ),
+        ~/PackSignauxModuleDescriptor,
+        ~/TargetDataModuleDescriptor,
+    ]
+)
+export Descriptor_District_Quartier_Moyen_resistant_mieux is TEntityDescriptor(
+    DescriptorId        = GUID:{9efebf25-6b32-4903-91d0-912fc061ec1c}
+    ClassNameForDebug   = 'Quartier_Moyen_resistant_mieux'
+    ModulesDescriptors  =
+    [
+        TTypeUnitModuleDescriptor
+        (
+        ),
+        ~/BuildingTagsModuleDescriptor,
+        TFlagsModuleDescriptor
+        (
+            InitialFlagSet =
+            [
+                Flag_Detectable,
+                Flag_Batiment,
+            ]
+        ),
+        ~/DistrictModuleDescriptor,
+        TDistrictUnitsContainerModuleDescriptor
+        (
+            NbSlots                         = 4
+            AllowedTagSet                   = [
+                "Inf_quartier_ok",
+            ]
+        ),
+        TDynamicTerrainModuleDescriptor
+        (
+            TerrainToApplyOnInit  = ETerrainType/Batiment
+            TerrainToApplyOnDeath = ETerrainType/Ruin
+            OnlyOnProduction = False
+        ),
+        ~/InflammableModuleDescriptorDistrict,
+        ~/DistrictPositionModuleDescriptor,
+        TBaseDamageModuleDescriptor
+        (
+            MaxPhysicalDamages = 60
+            MaxSuppressionDamages = ~/Building_MaxSuppressionDamages
+            MaxStunDamages = ~/Building_MaxStunDamages
+        ),
+        TDamageModuleDescriptor
+        (
+            SuppressDamagesRegenRatio = ~/Building_SuppressDamagesRegenRatioList
+            StunDamagesRegen = ~/Building_StunDamagesRegen
+            BlindageProperties = TBlindageProperties
+            (
+                ArmorDescriptorFront = ArmorDescriptor_Batiment_1
+                ArmorDescriptorSides = ArmorDescriptor_Batiment_1
+                ArmorDescriptorRear = ArmorDescriptor_Batiment_1
+                ArmorDescriptorTop = ArmorDescriptor_Batiment_1
+            )
+            KillWhenDamagesReachMax = True
+            HitRollSize = 5.0
+            HitRollECM = 0.0
+            AutoOrientation = False
+            UseTopArmorAgainstFire = True
+        ),
+        ~/DistrictSelectionModuleDescriptor,
+        TShootingPointsModuleDescriptor(),
+        ApparenceModel is ~/DistrictApparenceModelModuleDescriptor,
+        ~/LinkTeamModuleDescriptor,
+        ~/DebugModuleDescriptor,
+        TIAStratModuleDescriptor
+        (
+            DatabaseId = 1
+            GameplayBehavior = EGameplayBehavior/Nothing
+        ),
+        TCadavreGeneratorModuleDescriptorUnit( CadavreDescriptor = ~/Descriptor_UnitCadavre_Quartier_Moyen_resistant_mieux ),
+        TMinimapDisplayModuleDescriptor
+        (
+            Texture = "Texture_Minimap_Unit_inf"
+            FollowUnitOrientation = True
+        ),
+        ~/PackSignauxModuleDescriptor,
+        ~/TargetDataModuleDescriptor,
+    ]
+)

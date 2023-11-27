@@ -1,0 +1,39 @@
+export SeuilZoomAffichageZoneDeploiement is 100000
+
+export AllRanges is TVisibilityRangeContainer
+(
+    AltitudeMin      is 0
+    AltitudeMax      is 15000000
+    AltitudeMaxForFx is 1000000 // valeur max utilisé pour le scale des fx
+
+    ItemList =
+    [
+        export Zoom12bis is TVisibilityRange
+        (
+            AltitudeMax = AltitudeMax
+            AltitudeMin = ~/SeuilZoomAffichageZoneDeploiement
+        ),
+        export ZoomMinimap is TVisibilityRange
+        (
+            AltitudeMax = AltitudeMax
+            AltitudeMin = AltitudeMin
+        ),
+        export Zoom1234ForFx is TVisibilityRange
+        (
+            AltitudeMax = AltitudeMaxForFx
+            AltitudeMin = AltitudeMin
+        ),
+    ]
+)
+
+export HelperVisibility is THelperVisibility
+(
+    Camera    = $/M3D/Camera/CameraPrincipale
+    World     = $/M3D/Scene/DefaultWorld
+    RangeList = ~/AllRanges
+)
+
+export HelperVisibilitySaveLoadHelper is THelperVisibilitySaveLoadHelper
+(
+    Visibility = ~/HelperVisibility
+)

@@ -1,0 +1,80 @@
+DebugModuleDescriptor is TDebugModuleDescriptor()
+EmptyTagsModuleDescriptor is TTagsModuleDescriptor()
+LinkTeamModuleDescriptor is TLinkTeamModuleDescriptor()
+PackSignauxModuleDescriptor  is TPackSignauxModuleDescriptor()
+SimpleTypeUnitModuleDescriptor is TTypeUnitModuleDescriptor()
+TargetDataModuleDescriptor is TTargetDataModuleDescriptor()
+
+template TModuleSelectorFilterIfCadavre
+[ Descriptor ]
+is TModuleSelectorFilter
+(
+    Condition  = TModuleSelectorCondition_ParamEquals_Integer(ParamId=~/Parameter_ModuleCreationSelectionFilter  ParamValue=~/ModuleCreationFilter_Cadavre)
+    Descriptor = <Descriptor>
+)
+
+NilDescriptorIfCadavre is TModuleSelectorFilterIfCadavre
+(
+    Descriptor = nil
+)
+
+ShowroomPositionModuleDescriptor is TPositionModuleDescriptor
+(
+    InGeoDb                    = False
+    ClampInWorld               = False
+    ClampOutMap                = False
+    LowAltitudeFlyingAltitude  = 0
+    NearGroundFlyingAltitude   = 0
+)
+
+FirePositionModuleDescriptor is TPositionModuleDescriptor
+(
+    InGeoDb                    = False
+    ClampInWorld               = True
+    ClampOutMap                = False
+    LowAltitudeFlyingAltitude  = 0
+    NearGroundFlyingAltitude   = 0
+)
+
+MissilePositionModuleDescriptor is TPositionModuleDescriptor
+(
+    InGeoDb                    = True
+    ClampInWorld               = False
+    ClampOutMap                = True
+    LowAltitudeFlyingAltitude  = 0
+    NearGroundFlyingAltitude   = 0
+)
+
+SmokePositionModuleDescriptor is TPositionModuleDescriptor
+(
+    InGeoDb                    = False
+    ClampInWorld               = True
+    ClampOutMap                = False
+    LowAltitudeFlyingAltitude  = 0
+    NearGroundFlyingAltitude   = 0
+)
+
+template Descriptor_Unit_MimeticUnit[ DescriptorId, MimeticName ] is TEntityDescriptor
+(
+    DescriptorId      = <DescriptorId>
+    ClassNameForDebug = 'Unit_MimeticUnit'
+    World = WorldIndices_Mimetic_Units
+    ModulesDescriptors = [
+        // Position
+            TMimeticTransformModuleDescriptor(),
+            TMimeticSteeringModuleDescriptor(),
+            TLinkTeamModuleDescriptor(),
+            TLinkToOwnerModuleDescriptor(),
+            TApparenceModelModuleDescriptor
+            (
+                PickableObject = True
+                Depiction      = TTimelyDepictionReceiverFactory( MimeticName = <MimeticName> )
+            ),
+            TSoldierAnimationModuleDescriptor
+            (
+                SoldierAnimationDataDescriptor = ~/SoldierAnimationDataDescriptor
+            ),
+            TSoldierStatusModuleDescriptor(),
+            TMimeticFXManagerModuleDescriptor(),
+    ]
+)

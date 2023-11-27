@@ -1,0 +1,21 @@
+export Modele_FV103_Spartan_UK is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/UK/APC/FV103_Spartan/FV103_Spartan.Ase2NdfBin'
+)
+
+export Modele_FV103_Spartan_UK_MID is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/UK/APC/FV103_Spartan_MID/FV103_Spartan_MID.Ase2NdfBin'
+)
+
+export Modele_FV103_Spartan_UK_LOW is TemplateMeshDescriptor
+(
+    FileName = 'GameData:/Assets/3D/Units/UK/APC/LODS/FV103_Spartan_LOW.Ase2NdfBin'
+)
+
+export ModelFile_FV103_Spartan_UK_Tourelle_01 is 'GameData:/Assets/3D/Units/UK/Char/Chieftain_Mk11/L37_t1.Ase2NdfBin'
+
+export Modele_FV103_Spartan_UK_Tourelle_01 is TemplateMeshDescriptor
+(
+    FileName = ModelFile_FV103_Spartan_UK_Tourelle_01
+)

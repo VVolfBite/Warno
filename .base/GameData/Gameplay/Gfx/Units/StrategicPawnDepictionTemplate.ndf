@@ -1,0 +1,122 @@
+// Utiliser ce template pour les pions des unités stratégiques dans Steelman
+template StrategicPawnDepictionTemplate
+[
+    MeshSocle,
+    MeshTige,
+    MeshDescriptorPawn,
+    SubDepictionGenerators = []
+]
+is TDepictionTemplate
+(
+    Scaler = TConstantScaler( Scale = 6)
+    Selector = OnlyHighDepictionSelector
+    Operators = [DepictionOperator_Shader_Selection, DepictionOperator_Shader_GhostPawn]
+    DepictionAlternatives = [ DepictionDescriptor_LOD_High( MeshDescriptor = <MeshSocle> ) ]
+
+    SubDepictions = [ TSubDepiction
+    (
+        Selectable = True
+        Depiction = TDepictionTemplate
+        (
+            Selector = OnlyHighDepictionSelector
+            Operators = [DepictionOperator_Shader_Selection, DepictionOperator_Shader_GhostPawn]
+            DepictionAlternatives = [ DepictionDescriptor_LOD_High( MeshDescriptor = <MeshTige> ) ]
+
+            SubDepictions = [ TSubDepiction
+            (
+                Selectable = True
+                Anchor = "sommet"
+                Depiction = TDepictionTemplate
+                (
+                    Selector = OnlyHighDepictionSelector
+                    Operators = [DepictionOperator_Shader_Selection, DepictionOperator_Shader_GhostPawn]
+                    DepictionAlternatives = [
+                        DepictionDescriptor_LOD_High( MeshDescriptor = <MeshDescriptorPawn> )
+                    ]
+                    SubDepictionGenerators = <SubDepictionGenerators>
+                )
+            ) ]
+        )
+    ) ]
+)
+
+StrategicInfantryPoseOperator is TCosmeticFreezeSkeletalAnimationOperatorDesc
+(
+    Animation = FusilierRun
+    Cursor = 0.5
+)
+
+template StrategicInfantryPawnDepictionTemplate
+[
+    MeshSocle,
+    MeshDescriptorPawn,
+]
+is TDepictionTemplate
+(
+    Scaler = TConstantScaler( Scale = 7)
+    Selector = OnlyHighDepictionSelector
+    Operators = [DepictionOperator_Shader_Selection, DepictionOperator_Shader_GhostPawn]
+    DepictionAlternatives = [ DepictionDescriptor_LOD_High( MeshDescriptor = <MeshSocle> ) ]
+
+    SubDepictions = [ TSubDepiction
+    (
+        Selectable = True
+        Depiction = TDepictionTemplate
+        (
+            Selector = OnlyHighDepictionSelector
+            Operators = [DepictionOperator_Shader_Selection, DepictionOperator_Shader_GhostPawn]
+            DepictionAlternatives = [ DepictionDescriptor_LOD_High( MeshDescriptor = MeshModele_Tige_courte ) ]
+
+            SubDepictions = [ TSubDepiction
+            (
+                Selectable = True
+                Anchor = "sommet"
+                Depiction = TDepictionTemplate
+                (
+                    Scaler = TConstantScaler( Scale = 2 )
+                    Selector = OnlyHighDepictionSelector
+                    Operators = [ DepictionOperator_Shader_Selection, StrategicInfantryPoseOperator, DepictionOperator_Shader_GhostPawn ]
+                    DepictionAlternatives = [ DepictionDescriptor_LOD_High( MeshDescriptor = <MeshDescriptorPawn> ) ]
+                )
+            ) ]
+        )
+    ) ]
+)
+
+template StrategicAirplanePawnDepictionTemplate
+[
+    MeshSocle,
+    MeshDescriptorPawn,
+]
+is StrategicPawnDepictionTemplate
+(
+    MeshSocle = <MeshSocle>
+    MeshDescriptorPawn = <MeshDescriptorPawn>
+    MeshTige = MeshModele_Tige_moyenne //MeshModele_Tige_longue
+)
+
+template StrategicHelicopterPawnDepictionTemplate
+[
+    MeshSocle,
+    MeshDescriptorPawn,
+]
+is StrategicPawnDepictionTemplate
+(
+    MeshSocle = <MeshSocle>
+    MeshDescriptorPawn = <MeshDescriptorPawn>
+    MeshTige = MeshModele_Tige_moyenne
+)
+
+template StrategicGroundVehiclePawnDepictionTemplate
+[
+    MeshSocle,
+    MeshDescriptorPawn,
+    SubDepictionGenerators = []
+]
+is StrategicPawnDepictionTemplate
+(
+    MeshSocle = <MeshSocle>
+    MeshDescriptorPawn = <MeshDescriptorPawn>
+    MeshTige = MeshModele_Tige_courte
+    SubDepictionGenerators = <SubDepictionGenerators>
+)

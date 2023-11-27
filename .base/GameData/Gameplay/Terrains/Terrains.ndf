@@ -1,0 +1,692 @@
+export DefaultTerrain is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[0, 0, 0, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0
+    Name = 'DefaultTerrain'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Default
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export ForetDense is TGameplayTerrain
+(
+    BloqueAmphibie = true
+    BloqueAtterrissage = true
+    BloqueInfanterie = false
+    BloqueVehicule = true
+    BloqueVision = true
+    CriticalEffectProbability = 0.05
+    DamageModifierPerFamilyAndResistance =
+    MAP [
+            ("he", MAP [("infanterie",0.6)]),
+            ("fmballe", MAP [("infanterie",0.5)]),
+            ("balledca", MAP [("infanterie",0.5)]),
+        ]
+    DebugColor = rgba[2, 106, 2, 255]
+    DissimulationModifierGroundAir = 20
+    DissimulationModifierGroundGround = 24
+    HeightInMeters = 11
+    InflammabilityProbability = 0.8
+    Name = 'ForetDense'
+    SpeedModifierAllTerrainWheel = 0
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 0
+    StealthBonus = 6
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/ForetDense
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = false
+)
+export ForetLegere is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = true
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0.025
+    DamageModifierPerFamilyAndResistance =
+    MAP [
+            ("he", MAP [("infanterie",0.65)]),
+            ("he_autocanon", MAP [("infanterie",0.65)]),
+            ("superhe", MAP [("infanterie",0.65)]),
+            ("balle", MAP [("infanterie",0.65)]),
+            ("balledca", MAP [("infanterie",0.65)]),
+            ("howz", MAP [("infanterie",0.65)]),
+            ("howz_bombe", MAP [("infanterie",0.65)]),
+            ("fmballe", MAP [("infanterie",0.65)]),
+            ("roquette_ap", MAP [("infanterie",0.65)]),
+        ]
+    DebugColor = rgba[70, 252, 70, 255]
+    DissimulationModifierGroundAir = 12
+    DissimulationModifierGroundGround = 10
+    HeightInMeters = 20
+    InflammabilityProbability = 0.6
+    Name = 'ForetLegere'
+    SpeedModifierAllTerrainWheel = 0.45
+    SpeedModifierBoats = 0
+    SpeedModifierInfantry = 0.75
+    SpeedModifierTrack = 0.55
+    StealthBonus = 2.50
+    //~~~~~~~~
+
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/ForetLegere
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = false
+)
+export PetitBatiment is TGameplayTerrain
+(
+    BloqueAmphibie = true
+    BloqueAtterrissage = true
+    BloqueInfanterie = true
+    BloqueVehicule = true
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DamageModifierPerFamilyAndResistance =
+    MAP [
+            ("he", MAP [("infanterie",0.5)]),
+            ("he_autocanon", MAP [("infanterie",0.5)]),
+            ("superhe", MAP [("infanterie",0.5)]),
+            ("balle", MAP [("infanterie",0.5)]),
+            ("balledca", MAP [("infanterie",0.5)]),
+            ("howz", MAP [("infanterie",0.5)]),
+            ("howz_bombe", MAP [("infanterie",0.5)]),
+            ("fmballe", MAP [("infanterie",0.5)]),
+            // ("cac", MAP [("infanterie",0.85)]),
+            ("roquette_ap", MAP [("infanterie",0.5)]),
+        ]
+    DebugColor = rgba[0, 0, 0, 255]
+    DissimulationModifierGroundAir = 10.5
+    DissimulationModifierGroundGround = 10
+    HeightInMeters = 8
+    InflammabilityProbability = 0.2
+    Name = 'PetitBatiment'
+    SpeedModifierAllTerrainWheel = 0
+    SpeedModifierInfantry = 0.5
+    SpeedModifierTrack = 0
+    StealthBonus = 3.75
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/PetitBatiment
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export Batiment is TGameplayTerrain
+(
+    BloqueAmphibie = true
+    BloqueAtterrissage = true
+    BloqueInfanterie = true
+    BloqueVehicule = true
+    BloqueVision = true
+    CriticalEffectProbability = 0
+    DamageModifierPerFamilyAndResistance =
+    MAP [
+            ("he", MAP [("infanterie",0.5)]),
+            ("he_autocanon", MAP [("infanterie",0.5)]),
+            ("superhe", MAP [("infanterie",0.5)]),
+            ("balle", MAP [("infanterie",0.5)]),
+            ("balledca", MAP [("infanterie",0.5)]),
+            ("howz", MAP [("infanterie",0.5)]),
+            ("howz_bombe", MAP [("infanterie",0.5)]),
+            ("fmballe", MAP [("infanterie",0.5)]),
+            // ("cac", MAP [("infanterie",0.85)]),
+            ("roquette_ap", MAP [("infanterie",0.5)]),
+        ]
+    DebugColor = rgba[0, 0, 0, 255]
+    DissimulationModifierGroundAir = 10.5
+    DissimulationModifierGroundGround = 10
+    HeightInMeters = 8
+    InflammabilityProbability = 0.2
+    Name = 'Batiment'
+    SpeedModifierAllTerrainWheel = 0
+    SpeedModifierInfantry = 0.5
+    SpeedModifierTrack = 0
+    StealthBonus = 3.75
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Batiment
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export Ruin is TGameplayTerrain
+(
+    BloqueAmphibie = true
+    BloqueAtterrissage = true
+    BloqueInfanterie = false
+    BloqueVehicule = true
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DamageModifierPerFamilyAndResistance =
+    MAP [
+            ("he", MAP [("infanterie",0.60)]),
+            ("he_autocanon", MAP [("infanterie",0.45)]),
+            ("superhe", MAP [("infanterie",0.45)]),
+            ("balle", MAP [("infanterie",0.50)]),
+            ("balledca", MAP [("infanterie",0.50)]),
+            ("howz", MAP [("infanterie",0.35)]),
+            ("howz_bombe", MAP [("infanterie",0.35)]),
+            ("cac", MAP [("infanterie",0.85)]),
+            ("fmballe", MAP [("infanterie",0.35)]),
+            ("roquette_ap", MAP [("infanterie",0.55)]),
+        ]
+    DebugColor = rgba[0, 6, 200, 255]
+    DissimulationModifierGroundAir = 10.5
+    DissimulationModifierGroundGround = 10
+    HeightInMeters = 8
+    InflammabilityProbability = 0.2
+    Name = 'Ruin'
+    SpeedModifierAllTerrainWheel = 0
+    SpeedModifierInfantry = 0.5
+    SpeedModifierTrack = 0
+    StealthBonus = 3.75
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Ruin
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+
+//-------------------------------------------------------------------------------------
+export Tranchee is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = true
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DamageModifierPerFamilyAndResistance = MAP [
+        (
+            "balle",
+            MAP [
+                (
+                    "infanterie",
+                    0.3
+                ),
+            ]
+        ),
+        (
+            "he",
+            MAP [
+                (
+                    "infanterie",
+                    0.1
+                ),
+            ]
+        ),
+    ]
+    DebugColor = rgba[192, 61, 0, 255]
+    DissimulationModifierGroundAir = 1
+    DissimulationModifierGroundGround = 1
+    HeightInMeters = 1
+    InflammabilityProbability = 0
+    Name = 'Trench'
+    SpeedModifierAllTerrainWheel = 0.9
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 0.9
+    StealthBonus = 9
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Tranchee
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export Barbeles is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = true
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0.6
+        DamageModifierPerFamilyAndResistance = MAP [
+        (
+            "balle",
+            MAP [
+                (
+                    "infanterie",
+                    1.5
+                ),
+            ]
+        ),
+        (
+            "he",
+            MAP [
+                (
+                    "infanterie",
+                    1.5
+                ),
+            ]
+        ),
+    ]
+    DebugColor = rgba[0, 0, 0, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 8
+    InflammabilityProbability = 0
+    Name = 'TerrainBarbeles'
+    SpeedModifierAllTerrainWheel = 0.25
+    SpeedModifierInfantry = 0.25
+    SpeedModifierTrack = 0.25
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 1
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Barbeles
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export NidMitrailleuse is TGameplayTerrain
+(
+    BloqueAmphibie = true
+    BloqueAtterrissage = true
+    BloqueInfanterie = true
+    BloqueVehicule = true
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DamageModifierPerFamilyAndResistance = MAP [
+        (
+            "balle",
+            MAP [
+                (
+                    "infanterie",
+                    0.8
+                ),
+            ]
+        ),
+        (
+            "he",
+            MAP [
+                (
+                    "infanterie",
+                    0.5
+                ),
+            ]
+        ),
+    ]
+    DebugColor = rgba[0, 0, 0, 255]
+    DissimulationModifierGroundAir = 1
+    DissimulationModifierGroundGround = 1
+    HeightInMeters = 1
+    InflammabilityProbability = 0
+    Name = 'GunnerNest'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 7
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/NidMitrailleuse
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export Bloqueur is TGameplayTerrain
+(
+    BloqueAmphibie = true
+    BloqueAtterrissage = true
+    BloqueInfanterie = true
+    BloqueVehicule = true
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[0, 0, 0, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0
+    Name = 'Bloqueur'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0.3
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Bloqueur
+    WorldLayerActiveMask = 3
+    AuthorizeNearGroundFlying = true
+)
+export StrategicForest is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[255, 255, 25, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0.1
+    Name = 'StrategicForest'
+    SpeedModifierAllTerrainWheel = 0.8
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 0.9
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/StrategicForest
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export StrategicPlain is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[255, 255, 25, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0.1
+    Name = 'StrategicPlain'
+    SpeedModifierAllTerrainWheel = 0.8
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 0.9
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/StrategicPlain
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export StrategicSemiUrban is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[255, 255, 25, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0.1
+    Name = 'StrategicSemiUrban'
+    SpeedModifierAllTerrainWheel = 0.8
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 0.9
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/StrategicSemiUrban
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export StrategicRiver is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[25, 25, 255, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0.1
+    Name = 'StrategicRiver'
+    SpeedModifierAllTerrainWheel = 0.8
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 0.9
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/StrategicRiver
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+
+export EauPeuProfonde is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = true
+    BloqueInfanterie = true
+    BloqueVehicule = true
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[16, 228, 228, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0
+    Name = 'EauPeuProfonde'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 0.8
+    SpeedModifierTrack = 0.3
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0.3
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/EauPeuProfonde
+    WorldLayerActiveMask = 3
+    AuthorizeNearGroundFlying = true
+)
+
+export Urbain is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = true
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0.05
+    DamageModifierPerFamilyAndResistance = MAP [
+        (
+            "balle",
+            MAP [
+                (
+                    "infanterie",
+                    0.8
+                ),
+            ]
+        ),
+        (
+            "he",
+            MAP [
+                (
+                    "infanterie",
+                    0.8
+                ),
+            ]
+        ),
+    ]
+    DebugColor = rgba[200, 170, 170, 255]
+    DissimulationModifierGroundAir = 40 //20
+    DissimulationModifierGroundGround = 40 //20
+    HeightInMeters = 4//8
+    InflammabilityProbability = 0.4
+    Name = 'Urbain'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 4 //7
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Urbain
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export Rocher is TGameplayTerrain
+(
+    BloqueAmphibie = true
+    BloqueAtterrissage = true
+    BloqueInfanterie = true
+    BloqueVehicule = true
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[186, 247, 200, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0.1
+    Name = 'Rocher'
+    SpeedModifierAllTerrainWheel = 0
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 0
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/Rocher
+    WorldLayerActiveMask = 3
+    AuthorizeNearGroundFlying = true
+)
+export SmokeHeavy is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[128, 128, 128, 255]
+    DissimulationModifierGroundAir = 50
+    DissimulationModifierGroundGround = 50
+    HeightInMeters = 25
+    InflammabilityProbability = 0
+    Name = 'HeavySmoke'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 5
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/HeavySmoke
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export SmokeLight is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[187, 187, 187, 255]
+    DissimulationModifierGroundAir = 50
+    DissimulationModifierGroundGround = 50
+    HeightInMeters = 25
+    InflammabilityProbability = 0
+    Name = 'LightSmoke'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 4
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/LightSmoke
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export SmokeMedium is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[156, 156, 156, 255]
+    DissimulationModifierGroundAir = 50
+    DissimulationModifierGroundGround = 50
+    HeightInMeters = 25
+    InflammabilityProbability = 0
+    Name = 'MediumSmoke'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 4.5
+    //~~~~~~~~
+    SpeedModifierBoats = 0
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/MediumSmoke
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)
+export EauProfonde is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = true
+    BloqueInfanterie = true
+    BloqueVehicule = true
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[16, 187, 187, 255]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0
+    Name = 'EauProfonde'
+    SpeedModifierAllTerrainWheel = 0.375
+    SpeedModifierInfantry = 0.8
+    SpeedModifierTrack = 0.375
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 1
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/EauProfonde
+    WorldLayerActiveMask = 3
+    AuthorizeNearGroundFlying = true
+)
+export BloqueConstruction is TGameplayTerrain
+(
+    BloqueAmphibie = false
+    BloqueAtterrissage = false
+    BloqueInfanterie = false
+    BloqueVehicule = false
+    BloqueVision = false
+    CriticalEffectProbability = 0
+    DebugColor = rgba[100, 100, 100, 100]
+    DissimulationModifierGroundAir = 0
+    DissimulationModifierGroundGround = 0
+    HeightInMeters = 0
+    InflammabilityProbability = 0
+    Name = 'BloqueConstruction'
+    SpeedModifierAllTerrainWheel = 1
+    SpeedModifierInfantry = 1
+    SpeedModifierTrack = 1
+    StealthBonus = 1
+    //~~~~~~~~
+    SpeedModifierBoats = 1
+    DissimulationSliceSizeInGameUnits = ~/DissimulationUnitSlice
+    TerrainType = ~/ETerrainType/BloqueConstruction
+    WorldLayerActiveMask = 255
+    AuthorizeNearGroundFlying = true
+)

@@ -1,0 +1,16 @@
+
+WarningPanelStrategicResources is TUICommonWarningPanelResource
+(
+    ComponentByName = MAP[
+        ( "StrategicWarningNegative", ~/StrategicWarningNegativeComponent ),
+        ( "StrategicMessage", ~/WarningPositiveComponent ),
+        ( "StrategicProdMessage", ~/StrategicWarningPositiveComponent ),
+        ( "WaitingForPlayersMessage", ~/WarningPositiveComponent ),
+        ( "WarningPositive", ~/WarningPositiveComponent ),
+        ( "ObservatorMode", ~/WarningPositiveComponent ),
+    ]
+
+    LifeAnimDurationForTemporary = 4.0
+    FadeInDuration = 0.4
+    FadeOutDuration = 0.8
+)

@@ -1,0 +1,58 @@
+public orderEvaluatorCollectionStrategic is TOrderEvaluatorCollectionDescriptor(
+    GameplayLogicManagerHandler = $/UI/LogicManagers/StrategicLogicManagerHandler
+    OrderEvaluatorList = [
+        TOrderEvaluatorAny(
+            OrderToken = "Shoot"
+            IgnoreDefaultOrder = true
+            FXFeedback = $/GFX/GameFx/FX_Feedback_Attack
+            MouseWidgetSelector = "MouseWidgetSelector_DenyOrder"
+            PlayFXFeedbackWithoutTargets = true
+            IsTargetAuthorized = false
+        ),
+        TOrderEvaluatorBoxing(
+            OrderToken = "AirplaineAirDeny"
+            IgnoreDefaultOrder = true
+            FXFeedback = $/GFX/GameFx/FX_Feedback_Attack
+            MouseWidgetSelector = "MouseWidgetSelector_BoxingOrder"
+        ),
+        TOrderEvaluatorAny(
+            OrderToken = "AirplaineAirDeny"
+            IgnoreDefaultOrder = true
+            FXFeedback = $/GFX/GameFx/FX_Feedback_Attack
+            MouseWidgetSelector = "MouseWidgetSelector_BoxingOrder"
+            PlayFXFeedbackWithoutTargets = true
+            IsTargetAuthorized = false
+        ),
+        TOrderEvaluatorBomb(
+            OrderToken = "Bombarder"
+            IgnoreDefaultOrder = true
+            FXFeedback = $/GFX/GameFx/FX_Feedback_Attack
+            MouseWidgetSelector = "MouseWidgetSelector_BombOrder"
+        ),
+        TOrderEvaluatorAirplaneReco(
+            OrderToken = "AirplanePatrol"
+            IgnoreDefaultOrder = true
+            FXFeedback = $/GFX/GameFx/FX_Feedback_Move
+            MouseWidgetSelector = "MouseWidgetSelector_RecoOrder"
+        ),
+        TOrderEvaluatorAny(
+            OrderToken = "Fortify"
+            IgnoreDefaultOrder = true
+            IsTargetAuthorized = false
+        ),
+        TOrderEvaluatorFortifyAntiAir(
+            OrderToken = "FortifyAntiAir"
+            IgnoreDefaultOrder = true
+        ),
+        TOrderEvaluatorStrategicMove(
+            OrderToken = "Move"
+            IgnoreDefaultOrder = false
+            FXFeedback = $/GFX/GameFx/FX_Feedback_Move
+            MouseWidgetSelector = "MouseWidgetSelector_DefaultOrder"
+            PlayFXFeedbackWithoutTargets = true
+            ClampDestination = true
+        ),
+        // /!\ Attention, l'evaluator de move valide quasiment tout (c'est une sorte de default case). Bien reflechir/tester avant de rajouter des trucs en dessous : on ne va peut-etre jamais passer dedans !
+    ]
+)
+
