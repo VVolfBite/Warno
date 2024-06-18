@@ -1,17 +1,17 @@
 import ply.lex as lex
 
-# Define tokens
+# 定义Token
 tokens = (
     'NUMBER', 'HEX_NUMBER', 'FLOAT', 'STRING', 'BOOLEAN',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'MODULO',
     'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE', 'LBRACKET', 'RBRACKET', 'LANGLE', 'RANGLE',
-    'EQUALS', 'COMMA', 'DOT', 'QUESTION', 'COLON', 'PIPE', 'AMPERSAND',
-    'LT', 'GT', 'LE', 'GE', 'NE',
+    'EQUALS', 'COMMA', 'DOT', 'QUESTION', 'COLON', 'AMPERSOR', 'AMPERSAND',
+    'LT', 'GT', 'LE', 'GE', 'NE', 'TILDE',
     'EXPORT', 'IS', 'TEMPLATE', 'UNNAMED', 'NIL', 'PRIVATE', 'INT', 'TRUE', 'FALSE', 'DIV', 'MAP',
-    'ID',  # Ensure 'ID' is included in the tokens
+    'ID',
 )
 
-# Define keywords
+# 定义关键字
 keywords = {
     'export': 'EXPORT',
     'is': 'IS',
@@ -26,7 +26,7 @@ keywords = {
     'map': 'MAP',
 }
 
-# Define token regex patterns
+# Token正则表达形式
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
@@ -45,15 +45,15 @@ t_COMMA = r','
 t_DOT = r'\.'
 t_QUESTION = r'\?'
 t_COLON = r':'
-t_PIPE = r'\|'
+t_AMPERSOR = r'\|'
 t_AMPERSAND = r'&'
 t_LT = r'<'
 t_GT = r'>'
 t_LE = r'<='
 t_GE = r'>='
 t_NE = r'!='
+t_TILDE = r'~'
 
-# Define a rule to handle numbers (both integers and hexadecimal)
 def t_HEX_NUMBER(t):
     r'0x[0-9A-Fa-f]+'
     t.value = int(t.value, 16)
@@ -69,55 +69,53 @@ def t_NUMBER(t):
     t.value = int(t.value)
     return t
 
-# Define a rule to handle strings (both single and double quoted)
 def t_STRING(t):
     r'\"([^\\\n]|(\\.))*?\"|\'([^\\\n]|(\\.))*?\''
-    t.value = t.value[1:-1]  # Remove quotes
+    t.value = t.value[1:-1]  # 移除引号
     return t
 
-# Define a rule to handle boolean values
 def t_BOOLEAN(t):
     r'\btrue\b|\bfalse\b'
     t.value = True if t.value.lower() == 'true' else False
     return t
 
-# Define a rule to handle identifiers and keywords
 def t_ID(t):
     r'[A-Za-z_][A-Za-z_0-9]*'
-    t.type = keywords.get(t.value.lower(), 'ID')  # Check for reserved words
+    t.type = keywords.get(t.value.lower(), 'ID')  # 先去除关键字，然后识别为ID
     return t
 
-# Ignore whitespace and newline characters
-t_ignore = ' \t\n'
 
-# Define a rule to handle newlines and update line numbers
+t_ignore = ' \t\n' # 忽略空格/换行/制表
+
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-# Define a rule to handle comments (both single-line and multi-line)
+
 def t_COMMENT(t):
-    r'//.*|/\*[\s\S]*?\*/|{[\s\S]*?}|[(\*)[\s\S]*?(\*)]'
+    r'//.*|/\*[\s\S]*?\*/|{[\s\S]*?}|[(\*)[\s\S]*?(\*)]' # 注释这里有点问题，{}实际并不是注释，主要用于描述GUID:{}
     pass
 
-# Error handling rule
+
 def t_error(t):
-    print(f"Illegal character '{t.value[0]}'")
+    print(f"Illegal character '{t.value[0]}'") # 错误处理，单纯跳过去
     t.lexer.skip(1)
 
-# Build the lexer
+
+# 构建和创建Lexer
 lexer = lex.lex()
+# 测试函数
+def test_lexer():
+    def tokenize_file(filename):
+        with open(filename, 'r') as file:
+            data = file.read()
+        lexer.input(data)
+        while True:
+            tok = lexer.token()
+            if not tok:
+                break
+            print(tok)
+            
+    tokenize_file('./Parser/test.ndf')
 
-# Function to read data from file and tokenize
-def tokenize_file(filename):
-    with open(filename, 'r') as file:
-        data = file.read()
-    lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        print(tok)
-
-# Test the lexer with the content of test.ndf
-tokenize_file('test.ndf')
+test_lexer()

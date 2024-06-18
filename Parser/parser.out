@@ -1,0 +1,121 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AMPERSAND
+    COLON
+    COMMA
+    DIV
+    DOT
+    EXPORT
+    FALSE
+    GE
+    GT
+    INT
+    LANGLE
+    LBRACE
+    LBRACKET
+    LE
+    LT
+    MAP
+    NE
+    NIL
+    PIPE
+    PRIVATE
+    QUESTION
+    RANGLE
+    RBRACE
+    RBRACKET
+    TEMPLATE
+    TILDE
+    TRUE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement_list statement
+Rule 4     statement -> assignment
+Rule 5     statement -> object_definition
+Rule 6     statement -> template_definition
+Rule 7     assignment -> ID IS expression
+Rule 8     object_definition -> ID IS ID LPAREN member_list RPAREN
+Rule 9     object_definition -> UNNAMED ID LPAREN member_list RPAREN
+Rule 10    member_list -> member
+Rule 11    member_list -> member_list member
+Rule 12    member -> ID EQUALS expression
+Rule 13    expression -> term
+Rule 14    expression -> expression PLUS term
+Rule 15    expression -> expression MINUS term
+Rule 16    expression -> expression TIMES term
+Rule 17    expression -> expression DIVIDE term
+Rule 18    expression -> expression MODULO term
+Rule 19    term -> NUMBER
+Rule 20    term -> HEX_NUMBER
+Rule 21    term -> FLOAT
+Rule 22    term -> STRING
+Rule 23    term -> BOOLEAN
+Rule 24    term -> ID
+Rule 25    term -> LPAREN expression RPAREN
+
+Terminals, with rules where they appear
+
+AMPERSAND            : 
+BOOLEAN              : 23
+COLON                : 
+COMMA                : 
+DIV                  : 
+DIVIDE               : 17
+DOT                  : 
+EQUALS               : 12
+EXPORT               : 
+FALSE                : 
+FLOAT                : 21
+GE                   : 
+GT                   : 
+HEX_NUMBER           : 20
+ID                   : 7 8 8 9 12 24
+INT                  : 
+IS                   : 7 8
+LANGLE               : 
+LBRACE               : 
+LBRACKET             : 
+LE                   : 
+LPAREN               : 8 9 25
+LT                   : 
+MAP                  : 
+MINUS                : 15
+MODULO               : 18
+NE                   : 
+NIL                  : 
+NUMBER               : 19
+PIPE                 : 
+PLUS                 : 14
+PRIVATE              : 
+QUESTION             : 
+RANGLE               : 
+RBRACE               : 
+RBRACKET             : 
+RPAREN               : 8 9 25
+STRING               : 22
+TEMPLATE             : 
+TILDE                : 
+TIMES                : 16
+TRUE                 : 
+UNNAMED              : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 4
+expression           : 7 12 14 15 16 17 18 25
+member               : 10 11
+member_list          : 8 9 11
+object_definition    : 5
+program              : 0
+statement            : 2 3
+statement_list       : 1 3
+template_definition  : 6
+term                 : 13 14 15 16 17 18
+
