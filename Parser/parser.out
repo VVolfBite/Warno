@@ -2,32 +2,18 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    AMPERSAND
-    COLON
-    COMMA
     DIV
     DOT
     EXPORT
     FALSE
-    GE
-    GT
-    INT
     LANGLE
     LBRACE
-    LBRACKET
-    LE
-    LT
-    MAP
-    NE
     NIL
-    PIPE
     PRIVATE
     QUESTION
     RANGLE
     RBRACE
-    RBRACKET
-    TEMPLATE
-    TILDE
+    STRING
     TRUE
 
 Grammar
@@ -36,86 +22,3821 @@ Rule 0     S' -> program
 Rule 1     program -> statement_list
 Rule 2     statement_list -> statement
 Rule 3     statement_list -> statement_list statement
-Rule 4     statement -> assignment
-Rule 5     statement -> object_definition
+Rule 4     statement -> normal_definition
+Rule 5     statement -> unnamed_definition
 Rule 6     statement -> template_definition
-Rule 7     assignment -> ID IS expression
-Rule 8     object_definition -> ID IS ID LPAREN member_list RPAREN
-Rule 9     object_definition -> UNNAMED ID LPAREN member_list RPAREN
-Rule 10    member_list -> member
-Rule 11    member_list -> member_list member
-Rule 12    member -> ID EQUALS expression
-Rule 13    expression -> term
-Rule 14    expression -> expression PLUS term
-Rule 15    expression -> expression MINUS term
-Rule 16    expression -> expression TIMES term
-Rule 17    expression -> expression DIVIDE term
-Rule 18    expression -> expression MODULO term
-Rule 19    term -> NUMBER
-Rule 20    term -> HEX_NUMBER
-Rule 21    term -> FLOAT
-Rule 22    term -> STRING
-Rule 23    term -> BOOLEAN
-Rule 24    term -> ID
-Rule 25    term -> LPAREN expression RPAREN
+Rule 7     normal_definition -> var IS expression
+Rule 8     unnamed_definition -> UNNAMED term_object
+Rule 9     template_definition -> TEMPLATE term_template IS term_object
+Rule 10    expression -> expression PLUS expression
+Rule 11    expression -> expression MINUS expression
+Rule 12    expression -> expression TIMES expression
+Rule 13    expression -> expression DIVIDE expression
+Rule 14    expression -> expression MODULO expression
+Rule 15    expression -> expression EQUALS expression
+Rule 16    expression -> expression LE expression
+Rule 17    expression -> expression GE expression
+Rule 18    expression -> expression LT expression
+Rule 19    expression -> expression GT expression
+Rule 20    expression -> expression NE expression
+Rule 21    expression -> expression AMPERSAND expression
+Rule 22    expression -> expression AMPERSOR expression
+Rule 23    expression -> MINUS expression
+Rule 24    expression -> term
+Rule 25    term -> NUMBER
+Rule 26    term -> HEX_NUMBER
+Rule 27    term -> FLOAT
+Rule 28    term -> STR
+Rule 29    term -> BOOLEAN
+Rule 30    term -> term_vector
+Rule 31    term -> term_pair
+Rule 32    term -> term_map
+Rule 33    term -> term_path
+Rule 34    term -> term_object
+Rule 35    term -> term_template
+Rule 36    term -> var
+Rule 37    var -> ID
+Rule 38    term_vector -> LBRACKET RBRACKET
+Rule 39    term_vector -> LBRACKET term_vector_content RBRACKET
+Rule 40    term_vector_content -> term COMMA
+Rule 41    term_vector_content -> term_vector_content term COMMA
+Rule 42    term_pair -> LPAREN term COMMA term RPAREN
+Rule 43    term_map -> MAP LBRACKET RBRACKET
+Rule 44    term_map -> MAP LBRACKET term_map_content RBRACKET
+Rule 45    term_map_content -> term_pair COMMA
+Rule 46    term_map_content -> term_map_content term_pair COMMA
+Rule 47    type -> ID
+Rule 48    type -> INT
+Rule 49    type -> STR
+Rule 50    term_object -> type LPAREN member_list RPAREN
+Rule 51    member_list -> member
+Rule 52    member_list -> member_list member
+Rule 53    member -> var EQUALS expression
+Rule 54    member -> term_object
+Rule 55    term_template -> template_name LBRACKET para_list RBRACKET
+Rule 56    template_name -> ID
+Rule 57    para_list -> para
+Rule 58    para_list -> para_list COMMA para
+Rule 59    para -> var COLON type
+Rule 60    para -> var COLON type EQUALS expression
+Rule 61    term_path -> ID path_part
+Rule 62    term_path -> DOLLAR path_part
+Rule 63    term_path -> TILDE path_part
+Rule 64    path_part -> SLASH ID path_part
+Rule 65    path_part -> SLASH ID
+Rule 66    path_part -> SLASH
 
 Terminals, with rules where they appear
 
-AMPERSAND            : 
-BOOLEAN              : 23
-COLON                : 
-COMMA                : 
+AMPERSAND            : 21
+AMPERSOR             : 22
+BOOLEAN              : 29
+COLON                : 59 60
+COMMA                : 40 41 42 45 46 58
 DIV                  : 
-DIVIDE               : 17
+DIVIDE               : 13
+DOLLAR               : 62
 DOT                  : 
-EQUALS               : 12
+EQUALS               : 15 53 60
 EXPORT               : 
 FALSE                : 
-FLOAT                : 21
-GE                   : 
-GT                   : 
-HEX_NUMBER           : 20
-ID                   : 7 8 8 9 12 24
-INT                  : 
-IS                   : 7 8
+FLOAT                : 27
+GE                   : 17
+GT                   : 19
+HEX_NUMBER           : 26
+ID                   : 37 47 56 61 64 65
+INT                  : 48
+IS                   : 7 9
 LANGLE               : 
 LBRACE               : 
-LBRACKET             : 
-LE                   : 
-LPAREN               : 8 9 25
-LT                   : 
-MAP                  : 
-MINUS                : 15
-MODULO               : 18
-NE                   : 
+LBRACKET             : 38 39 43 44 55
+LE                   : 16
+LPAREN               : 42 50
+LT                   : 18
+MAP                  : 43 44
+MINUS                : 11 23
+MODULO               : 14
+NE                   : 20
 NIL                  : 
-NUMBER               : 19
-PIPE                 : 
-PLUS                 : 14
+NUMBER               : 25
+PLUS                 : 10
 PRIVATE              : 
 QUESTION             : 
 RANGLE               : 
 RBRACE               : 
-RBRACKET             : 
-RPAREN               : 8 9 25
-STRING               : 22
-TEMPLATE             : 
-TILDE                : 
-TIMES                : 16
+RBRACKET             : 38 39 43 44 55
+RPAREN               : 42 50
+SLASH                : 64 65 66
+STR                  : 28 49
+STRING               : 
+TEMPLATE             : 9
+TILDE                : 63
+TIMES                : 12
 TRUE                 : 
-UNNAMED              : 9
+UNNAMED              : 8
 error                : 
 
 Nonterminals, with rules where they appear
 
-assignment           : 4
-expression           : 7 12 14 15 16 17 18 25
-member               : 10 11
-member_list          : 8 9 11
-object_definition    : 5
+expression           : 7 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 53 60
+member               : 51 52
+member_list          : 50 52
+normal_definition    : 4
+para                 : 57 58
+para_list            : 55 58
+path_part            : 61 62 63 64
 program              : 0
 statement            : 2 3
 statement_list       : 1 3
 template_definition  : 6
-term                 : 13 14 15 16 17 18
+template_name        : 55
+term                 : 24 40 41 42 42
+term_map             : 32
+term_map_content     : 44 46
+term_object          : 8 9 34 54
+term_pair            : 31 45 46
+term_path            : 33
+term_template        : 9 35
+term_vector          : 30
+term_vector_content  : 39 41
+type                 : 50 59 60
+unnamed_definition   : 5
+var                  : 7 36 53 59 60
 
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement -> . normal_definition
+    (5) statement -> . unnamed_definition
+    (6) statement -> . template_definition
+    (7) normal_definition -> . var IS expression
+    (8) unnamed_definition -> . UNNAMED term_object
+    (9) template_definition -> . TEMPLATE term_template IS term_object
+    (37) var -> . ID
+
+    UNNAMED         shift and go to state 8
+    TEMPLATE        shift and go to state 9
+    ID              shift and go to state 10
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    normal_definition              shift and go to state 4
+    unnamed_definition             shift and go to state 5
+    template_definition            shift and go to state 6
+    var                            shift and go to state 7
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . normal_definition
+    (5) statement -> . unnamed_definition
+    (6) statement -> . template_definition
+    (7) normal_definition -> . var IS expression
+    (8) unnamed_definition -> . UNNAMED term_object
+    (9) template_definition -> . TEMPLATE term_template IS term_object
+    (37) var -> . ID
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    UNNAMED         shift and go to state 8
+    TEMPLATE        shift and go to state 9
+    ID              shift and go to state 10
+
+    statement                      shift and go to state 11
+    normal_definition              shift and go to state 4
+    unnamed_definition             shift and go to state 5
+    template_definition            shift and go to state 6
+    var                            shift and go to state 7
+
+state 3
+
+    (2) statement_list -> statement .
+
+    UNNAMED         reduce using rule 2 (statement_list -> statement .)
+    TEMPLATE        reduce using rule 2 (statement_list -> statement .)
+    ID              reduce using rule 2 (statement_list -> statement .)
+    $end            reduce using rule 2 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> normal_definition .
+
+    UNNAMED         reduce using rule 4 (statement -> normal_definition .)
+    TEMPLATE        reduce using rule 4 (statement -> normal_definition .)
+    ID              reduce using rule 4 (statement -> normal_definition .)
+    $end            reduce using rule 4 (statement -> normal_definition .)
+
+
+state 5
+
+    (5) statement -> unnamed_definition .
+
+    UNNAMED         reduce using rule 5 (statement -> unnamed_definition .)
+    TEMPLATE        reduce using rule 5 (statement -> unnamed_definition .)
+    ID              reduce using rule 5 (statement -> unnamed_definition .)
+    $end            reduce using rule 5 (statement -> unnamed_definition .)
+
+
+state 6
+
+    (6) statement -> template_definition .
+
+    UNNAMED         reduce using rule 6 (statement -> template_definition .)
+    TEMPLATE        reduce using rule 6 (statement -> template_definition .)
+    ID              reduce using rule 6 (statement -> template_definition .)
+    $end            reduce using rule 6 (statement -> template_definition .)
+
+
+state 7
+
+    (7) normal_definition -> var . IS expression
+
+    IS              shift and go to state 12
+
+
+state 8
+
+    (8) unnamed_definition -> UNNAMED . term_object
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+
+    ID              shift and go to state 15
+    INT             shift and go to state 16
+    STR             shift and go to state 17
+
+    term_object                    shift and go to state 13
+    type                           shift and go to state 14
+
+state 9
+
+    (9) template_definition -> TEMPLATE . term_template IS term_object
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (56) template_name -> . ID
+
+    ID              shift and go to state 20
+
+    term_template                  shift and go to state 18
+    template_name                  shift and go to state 19
+
+state 10
+
+    (37) var -> ID .
+
+    IS              reduce using rule 37 (var -> ID .)
+    COLON           reduce using rule 37 (var -> ID .)
+
+
+state 11
+
+    (3) statement_list -> statement_list statement .
+
+    UNNAMED         reduce using rule 3 (statement_list -> statement_list statement .)
+    TEMPLATE        reduce using rule 3 (statement_list -> statement_list statement .)
+    ID              reduce using rule 3 (statement_list -> statement_list statement .)
+    $end            reduce using rule 3 (statement_list -> statement_list statement .)
+
+
+state 12
+
+    (7) normal_definition -> var IS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    var                            shift and go to state 21
+    expression                     shift and go to state 22
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 13
+
+    (8) unnamed_definition -> UNNAMED term_object .
+
+    UNNAMED         reduce using rule 8 (unnamed_definition -> UNNAMED term_object .)
+    TEMPLATE        reduce using rule 8 (unnamed_definition -> UNNAMED term_object .)
+    ID              reduce using rule 8 (unnamed_definition -> UNNAMED term_object .)
+    $end            reduce using rule 8 (unnamed_definition -> UNNAMED term_object .)
+
+
+state 14
+
+    (50) term_object -> type . LPAREN member_list RPAREN
+
+    LPAREN          shift and go to state 42
+
+
+state 15
+
+    (47) type -> ID .
+
+    LPAREN          reduce using rule 47 (type -> ID .)
+    EQUALS          reduce using rule 47 (type -> ID .)
+    RBRACKET        reduce using rule 47 (type -> ID .)
+    COMMA           reduce using rule 47 (type -> ID .)
+
+
+state 16
+
+    (48) type -> INT .
+
+    LPAREN          reduce using rule 48 (type -> INT .)
+    EQUALS          reduce using rule 48 (type -> INT .)
+    RBRACKET        reduce using rule 48 (type -> INT .)
+    COMMA           reduce using rule 48 (type -> INT .)
+
+
+state 17
+
+    (49) type -> STR .
+
+    LPAREN          reduce using rule 49 (type -> STR .)
+    EQUALS          reduce using rule 49 (type -> STR .)
+    RBRACKET        reduce using rule 49 (type -> STR .)
+    COMMA           reduce using rule 49 (type -> STR .)
+
+
+state 18
+
+    (9) template_definition -> TEMPLATE term_template . IS term_object
+
+    IS              shift and go to state 43
+
+
+state 19
+
+    (55) term_template -> template_name . LBRACKET para_list RBRACKET
+
+    LBRACKET        shift and go to state 44
+
+
+state 20
+
+    (56) template_name -> ID .
+
+    LBRACKET        reduce using rule 56 (template_name -> ID .)
+
+
+state 21
+
+    (36) term -> var .
+
+    PLUS            reduce using rule 36 (term -> var .)
+    MINUS           reduce using rule 36 (term -> var .)
+    TIMES           reduce using rule 36 (term -> var .)
+    DIVIDE          reduce using rule 36 (term -> var .)
+    MODULO          reduce using rule 36 (term -> var .)
+    EQUALS          reduce using rule 36 (term -> var .)
+    LE              reduce using rule 36 (term -> var .)
+    GE              reduce using rule 36 (term -> var .)
+    LT              reduce using rule 36 (term -> var .)
+    GT              reduce using rule 36 (term -> var .)
+    NE              reduce using rule 36 (term -> var .)
+    AMPERSAND       reduce using rule 36 (term -> var .)
+    AMPERSOR        reduce using rule 36 (term -> var .)
+    UNNAMED         reduce using rule 36 (term -> var .)
+    TEMPLATE        reduce using rule 36 (term -> var .)
+    ID              reduce using rule 36 (term -> var .)
+    $end            reduce using rule 36 (term -> var .)
+    RPAREN          reduce using rule 36 (term -> var .)
+    INT             reduce using rule 36 (term -> var .)
+    STR             reduce using rule 36 (term -> var .)
+    RBRACKET        reduce using rule 36 (term -> var .)
+    COMMA           reduce using rule 36 (term -> var .)
+
+
+state 22
+
+    (7) normal_definition -> var IS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    UNNAMED         reduce using rule 7 (normal_definition -> var IS expression .)
+    TEMPLATE        reduce using rule 7 (normal_definition -> var IS expression .)
+    ID              reduce using rule 7 (normal_definition -> var IS expression .)
+    $end            reduce using rule 7 (normal_definition -> var IS expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+    EQUALS          shift and go to state 50
+    LE              shift and go to state 51
+    GE              shift and go to state 52
+    LT              shift and go to state 53
+    GT              shift and go to state 54
+    NE              shift and go to state 55
+    AMPERSAND       shift and go to state 56
+    AMPERSOR        shift and go to state 57
+
+
+state 23
+
+    (23) expression -> MINUS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 58
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 24
+
+    (24) expression -> term .
+
+    PLUS            reduce using rule 24 (expression -> term .)
+    MINUS           reduce using rule 24 (expression -> term .)
+    TIMES           reduce using rule 24 (expression -> term .)
+    DIVIDE          reduce using rule 24 (expression -> term .)
+    MODULO          reduce using rule 24 (expression -> term .)
+    EQUALS          reduce using rule 24 (expression -> term .)
+    LE              reduce using rule 24 (expression -> term .)
+    GE              reduce using rule 24 (expression -> term .)
+    LT              reduce using rule 24 (expression -> term .)
+    GT              reduce using rule 24 (expression -> term .)
+    NE              reduce using rule 24 (expression -> term .)
+    AMPERSAND       reduce using rule 24 (expression -> term .)
+    AMPERSOR        reduce using rule 24 (expression -> term .)
+    UNNAMED         reduce using rule 24 (expression -> term .)
+    TEMPLATE        reduce using rule 24 (expression -> term .)
+    ID              reduce using rule 24 (expression -> term .)
+    $end            reduce using rule 24 (expression -> term .)
+    RPAREN          reduce using rule 24 (expression -> term .)
+    INT             reduce using rule 24 (expression -> term .)
+    STR             reduce using rule 24 (expression -> term .)
+    RBRACKET        reduce using rule 24 (expression -> term .)
+    COMMA           reduce using rule 24 (expression -> term .)
+
+
+state 25
+
+    (25) term -> NUMBER .
+
+    PLUS            reduce using rule 25 (term -> NUMBER .)
+    MINUS           reduce using rule 25 (term -> NUMBER .)
+    TIMES           reduce using rule 25 (term -> NUMBER .)
+    DIVIDE          reduce using rule 25 (term -> NUMBER .)
+    MODULO          reduce using rule 25 (term -> NUMBER .)
+    EQUALS          reduce using rule 25 (term -> NUMBER .)
+    LE              reduce using rule 25 (term -> NUMBER .)
+    GE              reduce using rule 25 (term -> NUMBER .)
+    LT              reduce using rule 25 (term -> NUMBER .)
+    GT              reduce using rule 25 (term -> NUMBER .)
+    NE              reduce using rule 25 (term -> NUMBER .)
+    AMPERSAND       reduce using rule 25 (term -> NUMBER .)
+    AMPERSOR        reduce using rule 25 (term -> NUMBER .)
+    UNNAMED         reduce using rule 25 (term -> NUMBER .)
+    TEMPLATE        reduce using rule 25 (term -> NUMBER .)
+    ID              reduce using rule 25 (term -> NUMBER .)
+    $end            reduce using rule 25 (term -> NUMBER .)
+    RPAREN          reduce using rule 25 (term -> NUMBER .)
+    INT             reduce using rule 25 (term -> NUMBER .)
+    STR             reduce using rule 25 (term -> NUMBER .)
+    RBRACKET        reduce using rule 25 (term -> NUMBER .)
+    COMMA           reduce using rule 25 (term -> NUMBER .)
+
+
+state 26
+
+    (26) term -> HEX_NUMBER .
+
+    PLUS            reduce using rule 26 (term -> HEX_NUMBER .)
+    MINUS           reduce using rule 26 (term -> HEX_NUMBER .)
+    TIMES           reduce using rule 26 (term -> HEX_NUMBER .)
+    DIVIDE          reduce using rule 26 (term -> HEX_NUMBER .)
+    MODULO          reduce using rule 26 (term -> HEX_NUMBER .)
+    EQUALS          reduce using rule 26 (term -> HEX_NUMBER .)
+    LE              reduce using rule 26 (term -> HEX_NUMBER .)
+    GE              reduce using rule 26 (term -> HEX_NUMBER .)
+    LT              reduce using rule 26 (term -> HEX_NUMBER .)
+    GT              reduce using rule 26 (term -> HEX_NUMBER .)
+    NE              reduce using rule 26 (term -> HEX_NUMBER .)
+    AMPERSAND       reduce using rule 26 (term -> HEX_NUMBER .)
+    AMPERSOR        reduce using rule 26 (term -> HEX_NUMBER .)
+    UNNAMED         reduce using rule 26 (term -> HEX_NUMBER .)
+    TEMPLATE        reduce using rule 26 (term -> HEX_NUMBER .)
+    ID              reduce using rule 26 (term -> HEX_NUMBER .)
+    $end            reduce using rule 26 (term -> HEX_NUMBER .)
+    RPAREN          reduce using rule 26 (term -> HEX_NUMBER .)
+    INT             reduce using rule 26 (term -> HEX_NUMBER .)
+    STR             reduce using rule 26 (term -> HEX_NUMBER .)
+    RBRACKET        reduce using rule 26 (term -> HEX_NUMBER .)
+    COMMA           reduce using rule 26 (term -> HEX_NUMBER .)
+
+
+state 27
+
+    (27) term -> FLOAT .
+
+    PLUS            reduce using rule 27 (term -> FLOAT .)
+    MINUS           reduce using rule 27 (term -> FLOAT .)
+    TIMES           reduce using rule 27 (term -> FLOAT .)
+    DIVIDE          reduce using rule 27 (term -> FLOAT .)
+    MODULO          reduce using rule 27 (term -> FLOAT .)
+    EQUALS          reduce using rule 27 (term -> FLOAT .)
+    LE              reduce using rule 27 (term -> FLOAT .)
+    GE              reduce using rule 27 (term -> FLOAT .)
+    LT              reduce using rule 27 (term -> FLOAT .)
+    GT              reduce using rule 27 (term -> FLOAT .)
+    NE              reduce using rule 27 (term -> FLOAT .)
+    AMPERSAND       reduce using rule 27 (term -> FLOAT .)
+    AMPERSOR        reduce using rule 27 (term -> FLOAT .)
+    UNNAMED         reduce using rule 27 (term -> FLOAT .)
+    TEMPLATE        reduce using rule 27 (term -> FLOAT .)
+    ID              reduce using rule 27 (term -> FLOAT .)
+    $end            reduce using rule 27 (term -> FLOAT .)
+    RPAREN          reduce using rule 27 (term -> FLOAT .)
+    INT             reduce using rule 27 (term -> FLOAT .)
+    STR             reduce using rule 27 (term -> FLOAT .)
+    RBRACKET        reduce using rule 27 (term -> FLOAT .)
+    COMMA           reduce using rule 27 (term -> FLOAT .)
+
+
+state 28
+
+    (28) term -> STR .
+    (49) type -> STR .
+
+    PLUS            reduce using rule 28 (term -> STR .)
+    MINUS           reduce using rule 28 (term -> STR .)
+    TIMES           reduce using rule 28 (term -> STR .)
+    DIVIDE          reduce using rule 28 (term -> STR .)
+    MODULO          reduce using rule 28 (term -> STR .)
+    EQUALS          reduce using rule 28 (term -> STR .)
+    LE              reduce using rule 28 (term -> STR .)
+    GE              reduce using rule 28 (term -> STR .)
+    LT              reduce using rule 28 (term -> STR .)
+    GT              reduce using rule 28 (term -> STR .)
+    NE              reduce using rule 28 (term -> STR .)
+    AMPERSAND       reduce using rule 28 (term -> STR .)
+    AMPERSOR        reduce using rule 28 (term -> STR .)
+    UNNAMED         reduce using rule 28 (term -> STR .)
+    TEMPLATE        reduce using rule 28 (term -> STR .)
+    ID              reduce using rule 28 (term -> STR .)
+    $end            reduce using rule 28 (term -> STR .)
+    RPAREN          reduce using rule 28 (term -> STR .)
+    INT             reduce using rule 28 (term -> STR .)
+    STR             reduce using rule 28 (term -> STR .)
+    RBRACKET        reduce using rule 28 (term -> STR .)
+    COMMA           reduce using rule 28 (term -> STR .)
+    LPAREN          reduce using rule 49 (type -> STR .)
+
+
+state 29
+
+    (29) term -> BOOLEAN .
+
+    PLUS            reduce using rule 29 (term -> BOOLEAN .)
+    MINUS           reduce using rule 29 (term -> BOOLEAN .)
+    TIMES           reduce using rule 29 (term -> BOOLEAN .)
+    DIVIDE          reduce using rule 29 (term -> BOOLEAN .)
+    MODULO          reduce using rule 29 (term -> BOOLEAN .)
+    EQUALS          reduce using rule 29 (term -> BOOLEAN .)
+    LE              reduce using rule 29 (term -> BOOLEAN .)
+    GE              reduce using rule 29 (term -> BOOLEAN .)
+    LT              reduce using rule 29 (term -> BOOLEAN .)
+    GT              reduce using rule 29 (term -> BOOLEAN .)
+    NE              reduce using rule 29 (term -> BOOLEAN .)
+    AMPERSAND       reduce using rule 29 (term -> BOOLEAN .)
+    AMPERSOR        reduce using rule 29 (term -> BOOLEAN .)
+    UNNAMED         reduce using rule 29 (term -> BOOLEAN .)
+    TEMPLATE        reduce using rule 29 (term -> BOOLEAN .)
+    ID              reduce using rule 29 (term -> BOOLEAN .)
+    $end            reduce using rule 29 (term -> BOOLEAN .)
+    RPAREN          reduce using rule 29 (term -> BOOLEAN .)
+    INT             reduce using rule 29 (term -> BOOLEAN .)
+    STR             reduce using rule 29 (term -> BOOLEAN .)
+    RBRACKET        reduce using rule 29 (term -> BOOLEAN .)
+    COMMA           reduce using rule 29 (term -> BOOLEAN .)
+
+
+state 30
+
+    (30) term -> term_vector .
+
+    PLUS            reduce using rule 30 (term -> term_vector .)
+    MINUS           reduce using rule 30 (term -> term_vector .)
+    TIMES           reduce using rule 30 (term -> term_vector .)
+    DIVIDE          reduce using rule 30 (term -> term_vector .)
+    MODULO          reduce using rule 30 (term -> term_vector .)
+    EQUALS          reduce using rule 30 (term -> term_vector .)
+    LE              reduce using rule 30 (term -> term_vector .)
+    GE              reduce using rule 30 (term -> term_vector .)
+    LT              reduce using rule 30 (term -> term_vector .)
+    GT              reduce using rule 30 (term -> term_vector .)
+    NE              reduce using rule 30 (term -> term_vector .)
+    AMPERSAND       reduce using rule 30 (term -> term_vector .)
+    AMPERSOR        reduce using rule 30 (term -> term_vector .)
+    UNNAMED         reduce using rule 30 (term -> term_vector .)
+    TEMPLATE        reduce using rule 30 (term -> term_vector .)
+    ID              reduce using rule 30 (term -> term_vector .)
+    $end            reduce using rule 30 (term -> term_vector .)
+    RPAREN          reduce using rule 30 (term -> term_vector .)
+    INT             reduce using rule 30 (term -> term_vector .)
+    STR             reduce using rule 30 (term -> term_vector .)
+    RBRACKET        reduce using rule 30 (term -> term_vector .)
+    COMMA           reduce using rule 30 (term -> term_vector .)
+
+
+state 31
+
+    (31) term -> term_pair .
+
+    PLUS            reduce using rule 31 (term -> term_pair .)
+    MINUS           reduce using rule 31 (term -> term_pair .)
+    TIMES           reduce using rule 31 (term -> term_pair .)
+    DIVIDE          reduce using rule 31 (term -> term_pair .)
+    MODULO          reduce using rule 31 (term -> term_pair .)
+    EQUALS          reduce using rule 31 (term -> term_pair .)
+    LE              reduce using rule 31 (term -> term_pair .)
+    GE              reduce using rule 31 (term -> term_pair .)
+    LT              reduce using rule 31 (term -> term_pair .)
+    GT              reduce using rule 31 (term -> term_pair .)
+    NE              reduce using rule 31 (term -> term_pair .)
+    AMPERSAND       reduce using rule 31 (term -> term_pair .)
+    AMPERSOR        reduce using rule 31 (term -> term_pair .)
+    UNNAMED         reduce using rule 31 (term -> term_pair .)
+    TEMPLATE        reduce using rule 31 (term -> term_pair .)
+    ID              reduce using rule 31 (term -> term_pair .)
+    $end            reduce using rule 31 (term -> term_pair .)
+    RPAREN          reduce using rule 31 (term -> term_pair .)
+    INT             reduce using rule 31 (term -> term_pair .)
+    STR             reduce using rule 31 (term -> term_pair .)
+    RBRACKET        reduce using rule 31 (term -> term_pair .)
+    COMMA           reduce using rule 31 (term -> term_pair .)
+
+
+state 32
+
+    (32) term -> term_map .
+
+    PLUS            reduce using rule 32 (term -> term_map .)
+    MINUS           reduce using rule 32 (term -> term_map .)
+    TIMES           reduce using rule 32 (term -> term_map .)
+    DIVIDE          reduce using rule 32 (term -> term_map .)
+    MODULO          reduce using rule 32 (term -> term_map .)
+    EQUALS          reduce using rule 32 (term -> term_map .)
+    LE              reduce using rule 32 (term -> term_map .)
+    GE              reduce using rule 32 (term -> term_map .)
+    LT              reduce using rule 32 (term -> term_map .)
+    GT              reduce using rule 32 (term -> term_map .)
+    NE              reduce using rule 32 (term -> term_map .)
+    AMPERSAND       reduce using rule 32 (term -> term_map .)
+    AMPERSOR        reduce using rule 32 (term -> term_map .)
+    UNNAMED         reduce using rule 32 (term -> term_map .)
+    TEMPLATE        reduce using rule 32 (term -> term_map .)
+    ID              reduce using rule 32 (term -> term_map .)
+    $end            reduce using rule 32 (term -> term_map .)
+    RPAREN          reduce using rule 32 (term -> term_map .)
+    INT             reduce using rule 32 (term -> term_map .)
+    STR             reduce using rule 32 (term -> term_map .)
+    RBRACKET        reduce using rule 32 (term -> term_map .)
+    COMMA           reduce using rule 32 (term -> term_map .)
+
+
+state 33
+
+    (33) term -> term_path .
+
+    PLUS            reduce using rule 33 (term -> term_path .)
+    MINUS           reduce using rule 33 (term -> term_path .)
+    TIMES           reduce using rule 33 (term -> term_path .)
+    DIVIDE          reduce using rule 33 (term -> term_path .)
+    MODULO          reduce using rule 33 (term -> term_path .)
+    EQUALS          reduce using rule 33 (term -> term_path .)
+    LE              reduce using rule 33 (term -> term_path .)
+    GE              reduce using rule 33 (term -> term_path .)
+    LT              reduce using rule 33 (term -> term_path .)
+    GT              reduce using rule 33 (term -> term_path .)
+    NE              reduce using rule 33 (term -> term_path .)
+    AMPERSAND       reduce using rule 33 (term -> term_path .)
+    AMPERSOR        reduce using rule 33 (term -> term_path .)
+    UNNAMED         reduce using rule 33 (term -> term_path .)
+    TEMPLATE        reduce using rule 33 (term -> term_path .)
+    ID              reduce using rule 33 (term -> term_path .)
+    $end            reduce using rule 33 (term -> term_path .)
+    RPAREN          reduce using rule 33 (term -> term_path .)
+    INT             reduce using rule 33 (term -> term_path .)
+    STR             reduce using rule 33 (term -> term_path .)
+    RBRACKET        reduce using rule 33 (term -> term_path .)
+    COMMA           reduce using rule 33 (term -> term_path .)
+
+
+state 34
+
+    (34) term -> term_object .
+
+    PLUS            reduce using rule 34 (term -> term_object .)
+    MINUS           reduce using rule 34 (term -> term_object .)
+    TIMES           reduce using rule 34 (term -> term_object .)
+    DIVIDE          reduce using rule 34 (term -> term_object .)
+    MODULO          reduce using rule 34 (term -> term_object .)
+    EQUALS          reduce using rule 34 (term -> term_object .)
+    LE              reduce using rule 34 (term -> term_object .)
+    GE              reduce using rule 34 (term -> term_object .)
+    LT              reduce using rule 34 (term -> term_object .)
+    GT              reduce using rule 34 (term -> term_object .)
+    NE              reduce using rule 34 (term -> term_object .)
+    AMPERSAND       reduce using rule 34 (term -> term_object .)
+    AMPERSOR        reduce using rule 34 (term -> term_object .)
+    UNNAMED         reduce using rule 34 (term -> term_object .)
+    TEMPLATE        reduce using rule 34 (term -> term_object .)
+    ID              reduce using rule 34 (term -> term_object .)
+    $end            reduce using rule 34 (term -> term_object .)
+    RPAREN          reduce using rule 34 (term -> term_object .)
+    INT             reduce using rule 34 (term -> term_object .)
+    STR             reduce using rule 34 (term -> term_object .)
+    RBRACKET        reduce using rule 34 (term -> term_object .)
+    COMMA           reduce using rule 34 (term -> term_object .)
+
+
+state 35
+
+    (35) term -> term_template .
+
+    PLUS            reduce using rule 35 (term -> term_template .)
+    MINUS           reduce using rule 35 (term -> term_template .)
+    TIMES           reduce using rule 35 (term -> term_template .)
+    DIVIDE          reduce using rule 35 (term -> term_template .)
+    MODULO          reduce using rule 35 (term -> term_template .)
+    EQUALS          reduce using rule 35 (term -> term_template .)
+    LE              reduce using rule 35 (term -> term_template .)
+    GE              reduce using rule 35 (term -> term_template .)
+    LT              reduce using rule 35 (term -> term_template .)
+    GT              reduce using rule 35 (term -> term_template .)
+    NE              reduce using rule 35 (term -> term_template .)
+    AMPERSAND       reduce using rule 35 (term -> term_template .)
+    AMPERSOR        reduce using rule 35 (term -> term_template .)
+    UNNAMED         reduce using rule 35 (term -> term_template .)
+    TEMPLATE        reduce using rule 35 (term -> term_template .)
+    ID              reduce using rule 35 (term -> term_template .)
+    $end            reduce using rule 35 (term -> term_template .)
+    RPAREN          reduce using rule 35 (term -> term_template .)
+    INT             reduce using rule 35 (term -> term_template .)
+    STR             reduce using rule 35 (term -> term_template .)
+    RBRACKET        reduce using rule 35 (term -> term_template .)
+    COMMA           reduce using rule 35 (term -> term_template .)
+
+
+state 36
+
+    (38) term_vector -> LBRACKET . RBRACKET
+    (39) term_vector -> LBRACKET . term_vector_content RBRACKET
+    (40) term_vector_content -> . term COMMA
+    (41) term_vector_content -> . term_vector_content term COMMA
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    RBRACKET        shift and go to state 59
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    term_vector_content            shift and go to state 60
+    term                           shift and go to state 61
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 37
+
+    (42) term_pair -> LPAREN . term COMMA term RPAREN
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    term                           shift and go to state 62
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 38
+
+    (43) term_map -> MAP . LBRACKET RBRACKET
+    (44) term_map -> MAP . LBRACKET term_map_content RBRACKET
+
+    LBRACKET        shift and go to state 63
+
+
+state 39
+
+    (61) term_path -> ID . path_part
+    (37) var -> ID .
+    (47) type -> ID .
+    (56) template_name -> ID .
+    (64) path_part -> . SLASH ID path_part
+    (65) path_part -> . SLASH ID
+    (66) path_part -> . SLASH
+
+    PLUS            reduce using rule 37 (var -> ID .)
+    MINUS           reduce using rule 37 (var -> ID .)
+    TIMES           reduce using rule 37 (var -> ID .)
+    DIVIDE          reduce using rule 37 (var -> ID .)
+    MODULO          reduce using rule 37 (var -> ID .)
+    EQUALS          reduce using rule 37 (var -> ID .)
+    LE              reduce using rule 37 (var -> ID .)
+    GE              reduce using rule 37 (var -> ID .)
+    LT              reduce using rule 37 (var -> ID .)
+    GT              reduce using rule 37 (var -> ID .)
+    NE              reduce using rule 37 (var -> ID .)
+    AMPERSAND       reduce using rule 37 (var -> ID .)
+    AMPERSOR        reduce using rule 37 (var -> ID .)
+    UNNAMED         reduce using rule 37 (var -> ID .)
+    TEMPLATE        reduce using rule 37 (var -> ID .)
+    ID              reduce using rule 37 (var -> ID .)
+    $end            reduce using rule 37 (var -> ID .)
+    RPAREN          reduce using rule 37 (var -> ID .)
+    INT             reduce using rule 37 (var -> ID .)
+    STR             reduce using rule 37 (var -> ID .)
+    RBRACKET        reduce using rule 37 (var -> ID .)
+    COMMA           reduce using rule 37 (var -> ID .)
+    LPAREN          reduce using rule 47 (type -> ID .)
+    LBRACKET        reduce using rule 56 (template_name -> ID .)
+    SLASH           shift and go to state 65
+
+    path_part                      shift and go to state 64
+
+state 40
+
+    (62) term_path -> DOLLAR . path_part
+    (64) path_part -> . SLASH ID path_part
+    (65) path_part -> . SLASH ID
+    (66) path_part -> . SLASH
+
+    SLASH           shift and go to state 65
+
+    path_part                      shift and go to state 66
+
+state 41
+
+    (63) term_path -> TILDE . path_part
+    (64) path_part -> . SLASH ID path_part
+    (65) path_part -> . SLASH ID
+    (66) path_part -> . SLASH
+
+    SLASH           shift and go to state 65
+
+    path_part                      shift and go to state 67
+
+state 42
+
+    (50) term_object -> type LPAREN . member_list RPAREN
+    (51) member_list -> . member
+    (52) member_list -> . member_list member
+    (53) member -> . var EQUALS expression
+    (54) member -> . term_object
+    (37) var -> . ID
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+
+    ID              shift and go to state 72
+    INT             shift and go to state 16
+    STR             shift and go to state 17
+
+    type                           shift and go to state 14
+    member_list                    shift and go to state 68
+    member                         shift and go to state 69
+    var                            shift and go to state 70
+    term_object                    shift and go to state 71
+
+state 43
+
+    (9) template_definition -> TEMPLATE term_template IS . term_object
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+
+    ID              shift and go to state 15
+    INT             shift and go to state 16
+    STR             shift and go to state 17
+
+    term_object                    shift and go to state 73
+    type                           shift and go to state 14
+
+state 44
+
+    (55) term_template -> template_name LBRACKET . para_list RBRACKET
+    (57) para_list -> . para
+    (58) para_list -> . para_list COMMA para
+    (59) para -> . var COLON type
+    (60) para -> . var COLON type EQUALS expression
+    (37) var -> . ID
+
+    ID              shift and go to state 10
+
+    para_list                      shift and go to state 74
+    para                           shift and go to state 75
+    var                            shift and go to state 76
+
+state 45
+
+    (10) expression -> expression PLUS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 77
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 46
+
+    (11) expression -> expression MINUS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 78
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 47
+
+    (12) expression -> expression TIMES . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 79
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 48
+
+    (13) expression -> expression DIVIDE . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 80
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 49
+
+    (14) expression -> expression MODULO . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 81
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 50
+
+    (15) expression -> expression EQUALS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 82
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 51
+
+    (16) expression -> expression LE . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 83
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 52
+
+    (17) expression -> expression GE . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 84
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 53
+
+    (18) expression -> expression LT . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 85
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 54
+
+    (19) expression -> expression GT . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 86
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 55
+
+    (20) expression -> expression NE . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 87
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 56
+
+    (21) expression -> expression AMPERSAND . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 88
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 57
+
+    (22) expression -> expression AMPERSOR . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    expression                     shift and go to state 89
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 58
+
+    (23) expression -> MINUS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    PLUS            reduce using rule 23 (expression -> MINUS expression .)
+    MINUS           reduce using rule 23 (expression -> MINUS expression .)
+    TIMES           reduce using rule 23 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 23 (expression -> MINUS expression .)
+    MODULO          reduce using rule 23 (expression -> MINUS expression .)
+    EQUALS          reduce using rule 23 (expression -> MINUS expression .)
+    LE              reduce using rule 23 (expression -> MINUS expression .)
+    GE              reduce using rule 23 (expression -> MINUS expression .)
+    LT              reduce using rule 23 (expression -> MINUS expression .)
+    GT              reduce using rule 23 (expression -> MINUS expression .)
+    NE              reduce using rule 23 (expression -> MINUS expression .)
+    AMPERSAND       reduce using rule 23 (expression -> MINUS expression .)
+    AMPERSOR        reduce using rule 23 (expression -> MINUS expression .)
+    UNNAMED         reduce using rule 23 (expression -> MINUS expression .)
+    TEMPLATE        reduce using rule 23 (expression -> MINUS expression .)
+    ID              reduce using rule 23 (expression -> MINUS expression .)
+    $end            reduce using rule 23 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 23 (expression -> MINUS expression .)
+    INT             reduce using rule 23 (expression -> MINUS expression .)
+    STR             reduce using rule 23 (expression -> MINUS expression .)
+    RBRACKET        reduce using rule 23 (expression -> MINUS expression .)
+    COMMA           reduce using rule 23 (expression -> MINUS expression .)
+
+  ! PLUS            [ shift and go to state 45 ]
+  ! MINUS           [ shift and go to state 46 ]
+  ! TIMES           [ shift and go to state 47 ]
+  ! DIVIDE          [ shift and go to state 48 ]
+  ! MODULO          [ shift and go to state 49 ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 59
+
+    (38) term_vector -> LBRACKET RBRACKET .
+
+    PLUS            reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    MINUS           reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    TIMES           reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    DIVIDE          reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    MODULO          reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    EQUALS          reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    LE              reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    GE              reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    LT              reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    GT              reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    NE              reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    AMPERSAND       reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    AMPERSOR        reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    UNNAMED         reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    TEMPLATE        reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    ID              reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    $end            reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    RPAREN          reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    INT             reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    STR             reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    RBRACKET        reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+    COMMA           reduce using rule 38 (term_vector -> LBRACKET RBRACKET .)
+
+
+state 60
+
+    (39) term_vector -> LBRACKET term_vector_content . RBRACKET
+    (41) term_vector_content -> term_vector_content . term COMMA
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    RBRACKET        shift and go to state 90
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    term                           shift and go to state 91
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 61
+
+    (40) term_vector_content -> term . COMMA
+
+    COMMA           shift and go to state 92
+
+
+state 62
+
+    (42) term_pair -> LPAREN term . COMMA term RPAREN
+
+    COMMA           shift and go to state 93
+
+
+state 63
+
+    (43) term_map -> MAP LBRACKET . RBRACKET
+    (44) term_map -> MAP LBRACKET . term_map_content RBRACKET
+    (45) term_map_content -> . term_pair COMMA
+    (46) term_map_content -> . term_map_content term_pair COMMA
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+
+    RBRACKET        shift and go to state 94
+    LPAREN          shift and go to state 37
+
+    term_map_content               shift and go to state 95
+    term_pair                      shift and go to state 96
+
+state 64
+
+    (61) term_path -> ID path_part .
+
+    PLUS            reduce using rule 61 (term_path -> ID path_part .)
+    MINUS           reduce using rule 61 (term_path -> ID path_part .)
+    TIMES           reduce using rule 61 (term_path -> ID path_part .)
+    DIVIDE          reduce using rule 61 (term_path -> ID path_part .)
+    MODULO          reduce using rule 61 (term_path -> ID path_part .)
+    EQUALS          reduce using rule 61 (term_path -> ID path_part .)
+    LE              reduce using rule 61 (term_path -> ID path_part .)
+    GE              reduce using rule 61 (term_path -> ID path_part .)
+    LT              reduce using rule 61 (term_path -> ID path_part .)
+    GT              reduce using rule 61 (term_path -> ID path_part .)
+    NE              reduce using rule 61 (term_path -> ID path_part .)
+    AMPERSAND       reduce using rule 61 (term_path -> ID path_part .)
+    AMPERSOR        reduce using rule 61 (term_path -> ID path_part .)
+    UNNAMED         reduce using rule 61 (term_path -> ID path_part .)
+    TEMPLATE        reduce using rule 61 (term_path -> ID path_part .)
+    ID              reduce using rule 61 (term_path -> ID path_part .)
+    $end            reduce using rule 61 (term_path -> ID path_part .)
+    RPAREN          reduce using rule 61 (term_path -> ID path_part .)
+    INT             reduce using rule 61 (term_path -> ID path_part .)
+    STR             reduce using rule 61 (term_path -> ID path_part .)
+    RBRACKET        reduce using rule 61 (term_path -> ID path_part .)
+    COMMA           reduce using rule 61 (term_path -> ID path_part .)
+
+
+state 65
+
+    (64) path_part -> SLASH . ID path_part
+    (65) path_part -> SLASH . ID
+    (66) path_part -> SLASH .
+
+  ! shift/reduce conflict for ID resolved as shift
+    ID              shift and go to state 97
+    PLUS            reduce using rule 66 (path_part -> SLASH .)
+    MINUS           reduce using rule 66 (path_part -> SLASH .)
+    TIMES           reduce using rule 66 (path_part -> SLASH .)
+    DIVIDE          reduce using rule 66 (path_part -> SLASH .)
+    MODULO          reduce using rule 66 (path_part -> SLASH .)
+    EQUALS          reduce using rule 66 (path_part -> SLASH .)
+    LE              reduce using rule 66 (path_part -> SLASH .)
+    GE              reduce using rule 66 (path_part -> SLASH .)
+    LT              reduce using rule 66 (path_part -> SLASH .)
+    GT              reduce using rule 66 (path_part -> SLASH .)
+    NE              reduce using rule 66 (path_part -> SLASH .)
+    AMPERSAND       reduce using rule 66 (path_part -> SLASH .)
+    AMPERSOR        reduce using rule 66 (path_part -> SLASH .)
+    UNNAMED         reduce using rule 66 (path_part -> SLASH .)
+    TEMPLATE        reduce using rule 66 (path_part -> SLASH .)
+    $end            reduce using rule 66 (path_part -> SLASH .)
+    RPAREN          reduce using rule 66 (path_part -> SLASH .)
+    INT             reduce using rule 66 (path_part -> SLASH .)
+    STR             reduce using rule 66 (path_part -> SLASH .)
+    RBRACKET        reduce using rule 66 (path_part -> SLASH .)
+    COMMA           reduce using rule 66 (path_part -> SLASH .)
+
+  ! ID              [ reduce using rule 66 (path_part -> SLASH .) ]
+
+
+state 66
+
+    (62) term_path -> DOLLAR path_part .
+
+    PLUS            reduce using rule 62 (term_path -> DOLLAR path_part .)
+    MINUS           reduce using rule 62 (term_path -> DOLLAR path_part .)
+    TIMES           reduce using rule 62 (term_path -> DOLLAR path_part .)
+    DIVIDE          reduce using rule 62 (term_path -> DOLLAR path_part .)
+    MODULO          reduce using rule 62 (term_path -> DOLLAR path_part .)
+    EQUALS          reduce using rule 62 (term_path -> DOLLAR path_part .)
+    LE              reduce using rule 62 (term_path -> DOLLAR path_part .)
+    GE              reduce using rule 62 (term_path -> DOLLAR path_part .)
+    LT              reduce using rule 62 (term_path -> DOLLAR path_part .)
+    GT              reduce using rule 62 (term_path -> DOLLAR path_part .)
+    NE              reduce using rule 62 (term_path -> DOLLAR path_part .)
+    AMPERSAND       reduce using rule 62 (term_path -> DOLLAR path_part .)
+    AMPERSOR        reduce using rule 62 (term_path -> DOLLAR path_part .)
+    UNNAMED         reduce using rule 62 (term_path -> DOLLAR path_part .)
+    TEMPLATE        reduce using rule 62 (term_path -> DOLLAR path_part .)
+    ID              reduce using rule 62 (term_path -> DOLLAR path_part .)
+    $end            reduce using rule 62 (term_path -> DOLLAR path_part .)
+    RPAREN          reduce using rule 62 (term_path -> DOLLAR path_part .)
+    INT             reduce using rule 62 (term_path -> DOLLAR path_part .)
+    STR             reduce using rule 62 (term_path -> DOLLAR path_part .)
+    RBRACKET        reduce using rule 62 (term_path -> DOLLAR path_part .)
+    COMMA           reduce using rule 62 (term_path -> DOLLAR path_part .)
+
+
+state 67
+
+    (63) term_path -> TILDE path_part .
+
+    PLUS            reduce using rule 63 (term_path -> TILDE path_part .)
+    MINUS           reduce using rule 63 (term_path -> TILDE path_part .)
+    TIMES           reduce using rule 63 (term_path -> TILDE path_part .)
+    DIVIDE          reduce using rule 63 (term_path -> TILDE path_part .)
+    MODULO          reduce using rule 63 (term_path -> TILDE path_part .)
+    EQUALS          reduce using rule 63 (term_path -> TILDE path_part .)
+    LE              reduce using rule 63 (term_path -> TILDE path_part .)
+    GE              reduce using rule 63 (term_path -> TILDE path_part .)
+    LT              reduce using rule 63 (term_path -> TILDE path_part .)
+    GT              reduce using rule 63 (term_path -> TILDE path_part .)
+    NE              reduce using rule 63 (term_path -> TILDE path_part .)
+    AMPERSAND       reduce using rule 63 (term_path -> TILDE path_part .)
+    AMPERSOR        reduce using rule 63 (term_path -> TILDE path_part .)
+    UNNAMED         reduce using rule 63 (term_path -> TILDE path_part .)
+    TEMPLATE        reduce using rule 63 (term_path -> TILDE path_part .)
+    ID              reduce using rule 63 (term_path -> TILDE path_part .)
+    $end            reduce using rule 63 (term_path -> TILDE path_part .)
+    RPAREN          reduce using rule 63 (term_path -> TILDE path_part .)
+    INT             reduce using rule 63 (term_path -> TILDE path_part .)
+    STR             reduce using rule 63 (term_path -> TILDE path_part .)
+    RBRACKET        reduce using rule 63 (term_path -> TILDE path_part .)
+    COMMA           reduce using rule 63 (term_path -> TILDE path_part .)
+
+
+state 68
+
+    (50) term_object -> type LPAREN member_list . RPAREN
+    (52) member_list -> member_list . member
+    (53) member -> . var EQUALS expression
+    (54) member -> . term_object
+    (37) var -> . ID
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+
+    RPAREN          shift and go to state 98
+    ID              shift and go to state 72
+    INT             shift and go to state 16
+    STR             shift and go to state 17
+
+    type                           shift and go to state 14
+    member                         shift and go to state 99
+    var                            shift and go to state 70
+    term_object                    shift and go to state 71
+
+state 69
+
+    (51) member_list -> member .
+
+    RPAREN          reduce using rule 51 (member_list -> member .)
+    ID              reduce using rule 51 (member_list -> member .)
+    INT             reduce using rule 51 (member_list -> member .)
+    STR             reduce using rule 51 (member_list -> member .)
+
+
+state 70
+
+    (53) member -> var . EQUALS expression
+
+    EQUALS          shift and go to state 100
+
+
+state 71
+
+    (54) member -> term_object .
+
+    RPAREN          reduce using rule 54 (member -> term_object .)
+    ID              reduce using rule 54 (member -> term_object .)
+    INT             reduce using rule 54 (member -> term_object .)
+    STR             reduce using rule 54 (member -> term_object .)
+
+
+state 72
+
+    (37) var -> ID .
+    (47) type -> ID .
+
+    EQUALS          reduce using rule 37 (var -> ID .)
+    LPAREN          reduce using rule 47 (type -> ID .)
+
+
+state 73
+
+    (9) template_definition -> TEMPLATE term_template IS term_object .
+
+    UNNAMED         reduce using rule 9 (template_definition -> TEMPLATE term_template IS term_object .)
+    TEMPLATE        reduce using rule 9 (template_definition -> TEMPLATE term_template IS term_object .)
+    ID              reduce using rule 9 (template_definition -> TEMPLATE term_template IS term_object .)
+    $end            reduce using rule 9 (template_definition -> TEMPLATE term_template IS term_object .)
+
+
+state 74
+
+    (55) term_template -> template_name LBRACKET para_list . RBRACKET
+    (58) para_list -> para_list . COMMA para
+
+    RBRACKET        shift and go to state 101
+    COMMA           shift and go to state 102
+
+
+state 75
+
+    (57) para_list -> para .
+
+    RBRACKET        reduce using rule 57 (para_list -> para .)
+    COMMA           reduce using rule 57 (para_list -> para .)
+
+
+state 76
+
+    (59) para -> var . COLON type
+    (60) para -> var . COLON type EQUALS expression
+
+    COLON           shift and go to state 103
+
+
+state 77
+
+    (10) expression -> expression PLUS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    PLUS            reduce using rule 10 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 10 (expression -> expression PLUS expression .)
+    EQUALS          reduce using rule 10 (expression -> expression PLUS expression .)
+    LE              reduce using rule 10 (expression -> expression PLUS expression .)
+    GE              reduce using rule 10 (expression -> expression PLUS expression .)
+    LT              reduce using rule 10 (expression -> expression PLUS expression .)
+    GT              reduce using rule 10 (expression -> expression PLUS expression .)
+    NE              reduce using rule 10 (expression -> expression PLUS expression .)
+    AMPERSAND       reduce using rule 10 (expression -> expression PLUS expression .)
+    AMPERSOR        reduce using rule 10 (expression -> expression PLUS expression .)
+    UNNAMED         reduce using rule 10 (expression -> expression PLUS expression .)
+    TEMPLATE        reduce using rule 10 (expression -> expression PLUS expression .)
+    ID              reduce using rule 10 (expression -> expression PLUS expression .)
+    $end            reduce using rule 10 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 10 (expression -> expression PLUS expression .)
+    INT             reduce using rule 10 (expression -> expression PLUS expression .)
+    STR             reduce using rule 10 (expression -> expression PLUS expression .)
+    RBRACKET        reduce using rule 10 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 10 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! TIMES           [ reduce using rule 10 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression PLUS expression .) ]
+  ! MODULO          [ reduce using rule 10 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 45 ]
+  ! MINUS           [ shift and go to state 46 ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 78
+
+    (11) expression -> expression MINUS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    PLUS            reduce using rule 11 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 11 (expression -> expression MINUS expression .)
+    EQUALS          reduce using rule 11 (expression -> expression MINUS expression .)
+    LE              reduce using rule 11 (expression -> expression MINUS expression .)
+    GE              reduce using rule 11 (expression -> expression MINUS expression .)
+    LT              reduce using rule 11 (expression -> expression MINUS expression .)
+    GT              reduce using rule 11 (expression -> expression MINUS expression .)
+    NE              reduce using rule 11 (expression -> expression MINUS expression .)
+    AMPERSAND       reduce using rule 11 (expression -> expression MINUS expression .)
+    AMPERSOR        reduce using rule 11 (expression -> expression MINUS expression .)
+    UNNAMED         reduce using rule 11 (expression -> expression MINUS expression .)
+    TEMPLATE        reduce using rule 11 (expression -> expression MINUS expression .)
+    ID              reduce using rule 11 (expression -> expression MINUS expression .)
+    $end            reduce using rule 11 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 11 (expression -> expression MINUS expression .)
+    INT             reduce using rule 11 (expression -> expression MINUS expression .)
+    STR             reduce using rule 11 (expression -> expression MINUS expression .)
+    RBRACKET        reduce using rule 11 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 11 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! TIMES           [ reduce using rule 11 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 11 (expression -> expression MINUS expression .) ]
+  ! MODULO          [ reduce using rule 11 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 45 ]
+  ! MINUS           [ shift and go to state 46 ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 79
+
+    (12) expression -> expression TIMES expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    PLUS            reduce using rule 12 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 12 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 12 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 12 (expression -> expression TIMES expression .)
+    MODULO          reduce using rule 12 (expression -> expression TIMES expression .)
+    EQUALS          reduce using rule 12 (expression -> expression TIMES expression .)
+    LE              reduce using rule 12 (expression -> expression TIMES expression .)
+    GE              reduce using rule 12 (expression -> expression TIMES expression .)
+    LT              reduce using rule 12 (expression -> expression TIMES expression .)
+    GT              reduce using rule 12 (expression -> expression TIMES expression .)
+    NE              reduce using rule 12 (expression -> expression TIMES expression .)
+    AMPERSAND       reduce using rule 12 (expression -> expression TIMES expression .)
+    AMPERSOR        reduce using rule 12 (expression -> expression TIMES expression .)
+    UNNAMED         reduce using rule 12 (expression -> expression TIMES expression .)
+    TEMPLATE        reduce using rule 12 (expression -> expression TIMES expression .)
+    ID              reduce using rule 12 (expression -> expression TIMES expression .)
+    $end            reduce using rule 12 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 12 (expression -> expression TIMES expression .)
+    INT             reduce using rule 12 (expression -> expression TIMES expression .)
+    STR             reduce using rule 12 (expression -> expression TIMES expression .)
+    RBRACKET        reduce using rule 12 (expression -> expression TIMES expression .)
+    COMMA           reduce using rule 12 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 45 ]
+  ! MINUS           [ shift and go to state 46 ]
+  ! TIMES           [ shift and go to state 47 ]
+  ! DIVIDE          [ shift and go to state 48 ]
+  ! MODULO          [ shift and go to state 49 ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 80
+
+    (13) expression -> expression DIVIDE expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    PLUS            reduce using rule 13 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 13 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 13 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 13 (expression -> expression DIVIDE expression .)
+    MODULO          reduce using rule 13 (expression -> expression DIVIDE expression .)
+    EQUALS          reduce using rule 13 (expression -> expression DIVIDE expression .)
+    LE              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    GE              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    LT              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    GT              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    NE              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    AMPERSAND       reduce using rule 13 (expression -> expression DIVIDE expression .)
+    AMPERSOR        reduce using rule 13 (expression -> expression DIVIDE expression .)
+    UNNAMED         reduce using rule 13 (expression -> expression DIVIDE expression .)
+    TEMPLATE        reduce using rule 13 (expression -> expression DIVIDE expression .)
+    ID              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 13 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 13 (expression -> expression DIVIDE expression .)
+    INT             reduce using rule 13 (expression -> expression DIVIDE expression .)
+    STR             reduce using rule 13 (expression -> expression DIVIDE expression .)
+    RBRACKET        reduce using rule 13 (expression -> expression DIVIDE expression .)
+    COMMA           reduce using rule 13 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 45 ]
+  ! MINUS           [ shift and go to state 46 ]
+  ! TIMES           [ shift and go to state 47 ]
+  ! DIVIDE          [ shift and go to state 48 ]
+  ! MODULO          [ shift and go to state 49 ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 81
+
+    (14) expression -> expression MODULO expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    PLUS            reduce using rule 14 (expression -> expression MODULO expression .)
+    MINUS           reduce using rule 14 (expression -> expression MODULO expression .)
+    TIMES           reduce using rule 14 (expression -> expression MODULO expression .)
+    DIVIDE          reduce using rule 14 (expression -> expression MODULO expression .)
+    MODULO          reduce using rule 14 (expression -> expression MODULO expression .)
+    EQUALS          reduce using rule 14 (expression -> expression MODULO expression .)
+    LE              reduce using rule 14 (expression -> expression MODULO expression .)
+    GE              reduce using rule 14 (expression -> expression MODULO expression .)
+    LT              reduce using rule 14 (expression -> expression MODULO expression .)
+    GT              reduce using rule 14 (expression -> expression MODULO expression .)
+    NE              reduce using rule 14 (expression -> expression MODULO expression .)
+    AMPERSAND       reduce using rule 14 (expression -> expression MODULO expression .)
+    AMPERSOR        reduce using rule 14 (expression -> expression MODULO expression .)
+    UNNAMED         reduce using rule 14 (expression -> expression MODULO expression .)
+    TEMPLATE        reduce using rule 14 (expression -> expression MODULO expression .)
+    ID              reduce using rule 14 (expression -> expression MODULO expression .)
+    $end            reduce using rule 14 (expression -> expression MODULO expression .)
+    RPAREN          reduce using rule 14 (expression -> expression MODULO expression .)
+    INT             reduce using rule 14 (expression -> expression MODULO expression .)
+    STR             reduce using rule 14 (expression -> expression MODULO expression .)
+    RBRACKET        reduce using rule 14 (expression -> expression MODULO expression .)
+    COMMA           reduce using rule 14 (expression -> expression MODULO expression .)
+
+  ! PLUS            [ shift and go to state 45 ]
+  ! MINUS           [ shift and go to state 46 ]
+  ! TIMES           [ shift and go to state 47 ]
+  ! DIVIDE          [ shift and go to state 48 ]
+  ! MODULO          [ shift and go to state 49 ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 82
+
+    (15) expression -> expression EQUALS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    EQUALS          reduce using rule 15 (expression -> expression EQUALS expression .)
+    LE              reduce using rule 15 (expression -> expression EQUALS expression .)
+    GE              reduce using rule 15 (expression -> expression EQUALS expression .)
+    LT              reduce using rule 15 (expression -> expression EQUALS expression .)
+    GT              reduce using rule 15 (expression -> expression EQUALS expression .)
+    NE              reduce using rule 15 (expression -> expression EQUALS expression .)
+    AMPERSAND       reduce using rule 15 (expression -> expression EQUALS expression .)
+    AMPERSOR        reduce using rule 15 (expression -> expression EQUALS expression .)
+    UNNAMED         reduce using rule 15 (expression -> expression EQUALS expression .)
+    TEMPLATE        reduce using rule 15 (expression -> expression EQUALS expression .)
+    ID              reduce using rule 15 (expression -> expression EQUALS expression .)
+    $end            reduce using rule 15 (expression -> expression EQUALS expression .)
+    RPAREN          reduce using rule 15 (expression -> expression EQUALS expression .)
+    INT             reduce using rule 15 (expression -> expression EQUALS expression .)
+    STR             reduce using rule 15 (expression -> expression EQUALS expression .)
+    RBRACKET        reduce using rule 15 (expression -> expression EQUALS expression .)
+    COMMA           reduce using rule 15 (expression -> expression EQUALS expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! PLUS            [ reduce using rule 15 (expression -> expression EQUALS expression .) ]
+  ! MINUS           [ reduce using rule 15 (expression -> expression EQUALS expression .) ]
+  ! TIMES           [ reduce using rule 15 (expression -> expression EQUALS expression .) ]
+  ! DIVIDE          [ reduce using rule 15 (expression -> expression EQUALS expression .) ]
+  ! MODULO          [ reduce using rule 15 (expression -> expression EQUALS expression .) ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 83
+
+    (16) expression -> expression LE expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    EQUALS          reduce using rule 16 (expression -> expression LE expression .)
+    LE              reduce using rule 16 (expression -> expression LE expression .)
+    GE              reduce using rule 16 (expression -> expression LE expression .)
+    LT              reduce using rule 16 (expression -> expression LE expression .)
+    GT              reduce using rule 16 (expression -> expression LE expression .)
+    NE              reduce using rule 16 (expression -> expression LE expression .)
+    AMPERSAND       reduce using rule 16 (expression -> expression LE expression .)
+    AMPERSOR        reduce using rule 16 (expression -> expression LE expression .)
+    UNNAMED         reduce using rule 16 (expression -> expression LE expression .)
+    TEMPLATE        reduce using rule 16 (expression -> expression LE expression .)
+    ID              reduce using rule 16 (expression -> expression LE expression .)
+    $end            reduce using rule 16 (expression -> expression LE expression .)
+    RPAREN          reduce using rule 16 (expression -> expression LE expression .)
+    INT             reduce using rule 16 (expression -> expression LE expression .)
+    STR             reduce using rule 16 (expression -> expression LE expression .)
+    RBRACKET        reduce using rule 16 (expression -> expression LE expression .)
+    COMMA           reduce using rule 16 (expression -> expression LE expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! PLUS            [ reduce using rule 16 (expression -> expression LE expression .) ]
+  ! MINUS           [ reduce using rule 16 (expression -> expression LE expression .) ]
+  ! TIMES           [ reduce using rule 16 (expression -> expression LE expression .) ]
+  ! DIVIDE          [ reduce using rule 16 (expression -> expression LE expression .) ]
+  ! MODULO          [ reduce using rule 16 (expression -> expression LE expression .) ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 84
+
+    (17) expression -> expression GE expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    EQUALS          reduce using rule 17 (expression -> expression GE expression .)
+    LE              reduce using rule 17 (expression -> expression GE expression .)
+    GE              reduce using rule 17 (expression -> expression GE expression .)
+    LT              reduce using rule 17 (expression -> expression GE expression .)
+    GT              reduce using rule 17 (expression -> expression GE expression .)
+    NE              reduce using rule 17 (expression -> expression GE expression .)
+    AMPERSAND       reduce using rule 17 (expression -> expression GE expression .)
+    AMPERSOR        reduce using rule 17 (expression -> expression GE expression .)
+    UNNAMED         reduce using rule 17 (expression -> expression GE expression .)
+    TEMPLATE        reduce using rule 17 (expression -> expression GE expression .)
+    ID              reduce using rule 17 (expression -> expression GE expression .)
+    $end            reduce using rule 17 (expression -> expression GE expression .)
+    RPAREN          reduce using rule 17 (expression -> expression GE expression .)
+    INT             reduce using rule 17 (expression -> expression GE expression .)
+    STR             reduce using rule 17 (expression -> expression GE expression .)
+    RBRACKET        reduce using rule 17 (expression -> expression GE expression .)
+    COMMA           reduce using rule 17 (expression -> expression GE expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! PLUS            [ reduce using rule 17 (expression -> expression GE expression .) ]
+  ! MINUS           [ reduce using rule 17 (expression -> expression GE expression .) ]
+  ! TIMES           [ reduce using rule 17 (expression -> expression GE expression .) ]
+  ! DIVIDE          [ reduce using rule 17 (expression -> expression GE expression .) ]
+  ! MODULO          [ reduce using rule 17 (expression -> expression GE expression .) ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 85
+
+    (18) expression -> expression LT expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    EQUALS          reduce using rule 18 (expression -> expression LT expression .)
+    LE              reduce using rule 18 (expression -> expression LT expression .)
+    GE              reduce using rule 18 (expression -> expression LT expression .)
+    LT              reduce using rule 18 (expression -> expression LT expression .)
+    GT              reduce using rule 18 (expression -> expression LT expression .)
+    NE              reduce using rule 18 (expression -> expression LT expression .)
+    AMPERSAND       reduce using rule 18 (expression -> expression LT expression .)
+    AMPERSOR        reduce using rule 18 (expression -> expression LT expression .)
+    UNNAMED         reduce using rule 18 (expression -> expression LT expression .)
+    TEMPLATE        reduce using rule 18 (expression -> expression LT expression .)
+    ID              reduce using rule 18 (expression -> expression LT expression .)
+    $end            reduce using rule 18 (expression -> expression LT expression .)
+    RPAREN          reduce using rule 18 (expression -> expression LT expression .)
+    INT             reduce using rule 18 (expression -> expression LT expression .)
+    STR             reduce using rule 18 (expression -> expression LT expression .)
+    RBRACKET        reduce using rule 18 (expression -> expression LT expression .)
+    COMMA           reduce using rule 18 (expression -> expression LT expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! PLUS            [ reduce using rule 18 (expression -> expression LT expression .) ]
+  ! MINUS           [ reduce using rule 18 (expression -> expression LT expression .) ]
+  ! TIMES           [ reduce using rule 18 (expression -> expression LT expression .) ]
+  ! DIVIDE          [ reduce using rule 18 (expression -> expression LT expression .) ]
+  ! MODULO          [ reduce using rule 18 (expression -> expression LT expression .) ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 86
+
+    (19) expression -> expression GT expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    EQUALS          reduce using rule 19 (expression -> expression GT expression .)
+    LE              reduce using rule 19 (expression -> expression GT expression .)
+    GE              reduce using rule 19 (expression -> expression GT expression .)
+    LT              reduce using rule 19 (expression -> expression GT expression .)
+    GT              reduce using rule 19 (expression -> expression GT expression .)
+    NE              reduce using rule 19 (expression -> expression GT expression .)
+    AMPERSAND       reduce using rule 19 (expression -> expression GT expression .)
+    AMPERSOR        reduce using rule 19 (expression -> expression GT expression .)
+    UNNAMED         reduce using rule 19 (expression -> expression GT expression .)
+    TEMPLATE        reduce using rule 19 (expression -> expression GT expression .)
+    ID              reduce using rule 19 (expression -> expression GT expression .)
+    $end            reduce using rule 19 (expression -> expression GT expression .)
+    RPAREN          reduce using rule 19 (expression -> expression GT expression .)
+    INT             reduce using rule 19 (expression -> expression GT expression .)
+    STR             reduce using rule 19 (expression -> expression GT expression .)
+    RBRACKET        reduce using rule 19 (expression -> expression GT expression .)
+    COMMA           reduce using rule 19 (expression -> expression GT expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! PLUS            [ reduce using rule 19 (expression -> expression GT expression .) ]
+  ! MINUS           [ reduce using rule 19 (expression -> expression GT expression .) ]
+  ! TIMES           [ reduce using rule 19 (expression -> expression GT expression .) ]
+  ! DIVIDE          [ reduce using rule 19 (expression -> expression GT expression .) ]
+  ! MODULO          [ reduce using rule 19 (expression -> expression GT expression .) ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 87
+
+    (20) expression -> expression NE expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    EQUALS          reduce using rule 20 (expression -> expression NE expression .)
+    LE              reduce using rule 20 (expression -> expression NE expression .)
+    GE              reduce using rule 20 (expression -> expression NE expression .)
+    LT              reduce using rule 20 (expression -> expression NE expression .)
+    GT              reduce using rule 20 (expression -> expression NE expression .)
+    NE              reduce using rule 20 (expression -> expression NE expression .)
+    AMPERSAND       reduce using rule 20 (expression -> expression NE expression .)
+    AMPERSOR        reduce using rule 20 (expression -> expression NE expression .)
+    UNNAMED         reduce using rule 20 (expression -> expression NE expression .)
+    TEMPLATE        reduce using rule 20 (expression -> expression NE expression .)
+    ID              reduce using rule 20 (expression -> expression NE expression .)
+    $end            reduce using rule 20 (expression -> expression NE expression .)
+    RPAREN          reduce using rule 20 (expression -> expression NE expression .)
+    INT             reduce using rule 20 (expression -> expression NE expression .)
+    STR             reduce using rule 20 (expression -> expression NE expression .)
+    RBRACKET        reduce using rule 20 (expression -> expression NE expression .)
+    COMMA           reduce using rule 20 (expression -> expression NE expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+
+  ! PLUS            [ reduce using rule 20 (expression -> expression NE expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> expression NE expression .) ]
+  ! TIMES           [ reduce using rule 20 (expression -> expression NE expression .) ]
+  ! DIVIDE          [ reduce using rule 20 (expression -> expression NE expression .) ]
+  ! MODULO          [ reduce using rule 20 (expression -> expression NE expression .) ]
+  ! EQUALS          [ shift and go to state 50 ]
+  ! LE              [ shift and go to state 51 ]
+  ! GE              [ shift and go to state 52 ]
+  ! LT              [ shift and go to state 53 ]
+  ! GT              [ shift and go to state 54 ]
+  ! NE              [ shift and go to state 55 ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 88
+
+    (21) expression -> expression AMPERSAND expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    AMPERSAND       reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    AMPERSOR        reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    UNNAMED         reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    TEMPLATE        reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    ID              reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    $end            reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    RPAREN          reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    INT             reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    STR             reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    RBRACKET        reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    COMMA           reduce using rule 21 (expression -> expression AMPERSAND expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+    EQUALS          shift and go to state 50
+    LE              shift and go to state 51
+    GE              shift and go to state 52
+    LT              shift and go to state 53
+    GT              shift and go to state 54
+    NE              shift and go to state 55
+
+  ! PLUS            [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! MINUS           [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! TIMES           [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! DIVIDE          [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! MODULO          [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! EQUALS          [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! LE              [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! GE              [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! LT              [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! GT              [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! NE              [ reduce using rule 21 (expression -> expression AMPERSAND expression .) ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 89
+
+    (22) expression -> expression AMPERSOR expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    AMPERSAND       reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    AMPERSOR        reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    UNNAMED         reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    TEMPLATE        reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    ID              reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    $end            reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    RPAREN          reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    INT             reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    STR             reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    RBRACKET        reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    COMMA           reduce using rule 22 (expression -> expression AMPERSOR expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+    EQUALS          shift and go to state 50
+    LE              shift and go to state 51
+    GE              shift and go to state 52
+    LT              shift and go to state 53
+    GT              shift and go to state 54
+    NE              shift and go to state 55
+
+  ! PLUS            [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! MINUS           [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! TIMES           [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! DIVIDE          [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! MODULO          [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! EQUALS          [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! LE              [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! GE              [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! LT              [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! GT              [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! NE              [ reduce using rule 22 (expression -> expression AMPERSOR expression .) ]
+  ! AMPERSAND       [ shift and go to state 56 ]
+  ! AMPERSOR        [ shift and go to state 57 ]
+
+
+state 90
+
+    (39) term_vector -> LBRACKET term_vector_content RBRACKET .
+
+    PLUS            reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    MINUS           reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    TIMES           reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    DIVIDE          reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    MODULO          reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    EQUALS          reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    LE              reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    GE              reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    LT              reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    GT              reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    NE              reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    AMPERSAND       reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    AMPERSOR        reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    UNNAMED         reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    TEMPLATE        reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    ID              reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    $end            reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    RPAREN          reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    INT             reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    STR             reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    RBRACKET        reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+    COMMA           reduce using rule 39 (term_vector -> LBRACKET term_vector_content RBRACKET .)
+
+
+state 91
+
+    (41) term_vector_content -> term_vector_content term . COMMA
+
+    COMMA           shift and go to state 104
+
+
+state 92
+
+    (40) term_vector_content -> term COMMA .
+
+    RBRACKET        reduce using rule 40 (term_vector_content -> term COMMA .)
+    NUMBER          reduce using rule 40 (term_vector_content -> term COMMA .)
+    HEX_NUMBER      reduce using rule 40 (term_vector_content -> term COMMA .)
+    FLOAT           reduce using rule 40 (term_vector_content -> term COMMA .)
+    STR             reduce using rule 40 (term_vector_content -> term COMMA .)
+    BOOLEAN         reduce using rule 40 (term_vector_content -> term COMMA .)
+    LBRACKET        reduce using rule 40 (term_vector_content -> term COMMA .)
+    LPAREN          reduce using rule 40 (term_vector_content -> term COMMA .)
+    MAP             reduce using rule 40 (term_vector_content -> term COMMA .)
+    ID              reduce using rule 40 (term_vector_content -> term COMMA .)
+    DOLLAR          reduce using rule 40 (term_vector_content -> term COMMA .)
+    TILDE           reduce using rule 40 (term_vector_content -> term COMMA .)
+    INT             reduce using rule 40 (term_vector_content -> term COMMA .)
+
+
+state 93
+
+    (42) term_pair -> LPAREN term COMMA . term RPAREN
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    term                           shift and go to state 105
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 94
+
+    (43) term_map -> MAP LBRACKET RBRACKET .
+
+    PLUS            reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    MINUS           reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    TIMES           reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    DIVIDE          reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    MODULO          reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    EQUALS          reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    LE              reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    GE              reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    LT              reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    GT              reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    NE              reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    AMPERSAND       reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    AMPERSOR        reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    UNNAMED         reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    TEMPLATE        reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    ID              reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    $end            reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    RPAREN          reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    INT             reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    STR             reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    RBRACKET        reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+    COMMA           reduce using rule 43 (term_map -> MAP LBRACKET RBRACKET .)
+
+
+state 95
+
+    (44) term_map -> MAP LBRACKET term_map_content . RBRACKET
+    (46) term_map_content -> term_map_content . term_pair COMMA
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+
+    RBRACKET        shift and go to state 106
+    LPAREN          shift and go to state 37
+
+    term_pair                      shift and go to state 107
+
+state 96
+
+    (45) term_map_content -> term_pair . COMMA
+
+    COMMA           shift and go to state 108
+
+
+state 97
+
+    (64) path_part -> SLASH ID . path_part
+    (65) path_part -> SLASH ID .
+    (64) path_part -> . SLASH ID path_part
+    (65) path_part -> . SLASH ID
+    (66) path_part -> . SLASH
+
+    PLUS            reduce using rule 65 (path_part -> SLASH ID .)
+    MINUS           reduce using rule 65 (path_part -> SLASH ID .)
+    TIMES           reduce using rule 65 (path_part -> SLASH ID .)
+    DIVIDE          reduce using rule 65 (path_part -> SLASH ID .)
+    MODULO          reduce using rule 65 (path_part -> SLASH ID .)
+    EQUALS          reduce using rule 65 (path_part -> SLASH ID .)
+    LE              reduce using rule 65 (path_part -> SLASH ID .)
+    GE              reduce using rule 65 (path_part -> SLASH ID .)
+    LT              reduce using rule 65 (path_part -> SLASH ID .)
+    GT              reduce using rule 65 (path_part -> SLASH ID .)
+    NE              reduce using rule 65 (path_part -> SLASH ID .)
+    AMPERSAND       reduce using rule 65 (path_part -> SLASH ID .)
+    AMPERSOR        reduce using rule 65 (path_part -> SLASH ID .)
+    UNNAMED         reduce using rule 65 (path_part -> SLASH ID .)
+    TEMPLATE        reduce using rule 65 (path_part -> SLASH ID .)
+    ID              reduce using rule 65 (path_part -> SLASH ID .)
+    $end            reduce using rule 65 (path_part -> SLASH ID .)
+    RPAREN          reduce using rule 65 (path_part -> SLASH ID .)
+    INT             reduce using rule 65 (path_part -> SLASH ID .)
+    STR             reduce using rule 65 (path_part -> SLASH ID .)
+    RBRACKET        reduce using rule 65 (path_part -> SLASH ID .)
+    COMMA           reduce using rule 65 (path_part -> SLASH ID .)
+    SLASH           shift and go to state 65
+
+    path_part                      shift and go to state 109
+
+state 98
+
+    (50) term_object -> type LPAREN member_list RPAREN .
+
+    UNNAMED         reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    TEMPLATE        reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    ID              reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    $end            reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    PLUS            reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    MINUS           reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    TIMES           reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    DIVIDE          reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    MODULO          reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    EQUALS          reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    LE              reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    GE              reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    LT              reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    GT              reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    NE              reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    AMPERSAND       reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    AMPERSOR        reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    RPAREN          reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    INT             reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    STR             reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    RBRACKET        reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+    COMMA           reduce using rule 50 (term_object -> type LPAREN member_list RPAREN .)
+
+
+state 99
+
+    (52) member_list -> member_list member .
+
+    RPAREN          reduce using rule 52 (member_list -> member_list member .)
+    ID              reduce using rule 52 (member_list -> member_list member .)
+    INT             reduce using rule 52 (member_list -> member_list member .)
+    STR             reduce using rule 52 (member_list -> member_list member .)
+
+
+state 100
+
+    (53) member -> var EQUALS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    var                            shift and go to state 21
+    expression                     shift and go to state 110
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    type                           shift and go to state 14
+    template_name                  shift and go to state 19
+
+state 101
+
+    (55) term_template -> template_name LBRACKET para_list RBRACKET .
+
+    IS              reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    PLUS            reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    MINUS           reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    TIMES           reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    DIVIDE          reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    MODULO          reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    EQUALS          reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    LE              reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    GE              reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    LT              reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    GT              reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    NE              reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    AMPERSAND       reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    AMPERSOR        reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    UNNAMED         reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    TEMPLATE        reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    ID              reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    $end            reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    RPAREN          reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    INT             reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    STR             reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    RBRACKET        reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+    COMMA           reduce using rule 55 (term_template -> template_name LBRACKET para_list RBRACKET .)
+
+
+state 102
+
+    (58) para_list -> para_list COMMA . para
+    (59) para -> . var COLON type
+    (60) para -> . var COLON type EQUALS expression
+    (37) var -> . ID
+
+    ID              shift and go to state 10
+
+    para                           shift and go to state 111
+    var                            shift and go to state 76
+
+state 103
+
+    (59) para -> var COLON . type
+    (60) para -> var COLON . type EQUALS expression
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+
+    ID              shift and go to state 15
+    INT             shift and go to state 16
+    STR             shift and go to state 17
+
+    type                           shift and go to state 112
+
+state 104
+
+    (41) term_vector_content -> term_vector_content term COMMA .
+
+    RBRACKET        reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    NUMBER          reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    HEX_NUMBER      reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    FLOAT           reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    STR             reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    BOOLEAN         reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    LBRACKET        reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    LPAREN          reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    MAP             reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    ID              reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    DOLLAR          reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    TILDE           reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+    INT             reduce using rule 41 (term_vector_content -> term_vector_content term COMMA .)
+
+
+state 105
+
+    (42) term_pair -> LPAREN term COMMA term . RPAREN
+
+    RPAREN          shift and go to state 113
+
+
+state 106
+
+    (44) term_map -> MAP LBRACKET term_map_content RBRACKET .
+
+    PLUS            reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    MINUS           reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    TIMES           reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    DIVIDE          reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    MODULO          reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    EQUALS          reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    LE              reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    GE              reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    LT              reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    GT              reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    NE              reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    AMPERSAND       reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    AMPERSOR        reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    UNNAMED         reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    TEMPLATE        reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    ID              reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    $end            reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    RPAREN          reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    INT             reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    STR             reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    RBRACKET        reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+    COMMA           reduce using rule 44 (term_map -> MAP LBRACKET term_map_content RBRACKET .)
+
+
+state 107
+
+    (46) term_map_content -> term_map_content term_pair . COMMA
+
+    COMMA           shift and go to state 114
+
+
+state 108
+
+    (45) term_map_content -> term_pair COMMA .
+
+    RBRACKET        reduce using rule 45 (term_map_content -> term_pair COMMA .)
+    LPAREN          reduce using rule 45 (term_map_content -> term_pair COMMA .)
+
+
+state 109
+
+    (64) path_part -> SLASH ID path_part .
+
+    PLUS            reduce using rule 64 (path_part -> SLASH ID path_part .)
+    MINUS           reduce using rule 64 (path_part -> SLASH ID path_part .)
+    TIMES           reduce using rule 64 (path_part -> SLASH ID path_part .)
+    DIVIDE          reduce using rule 64 (path_part -> SLASH ID path_part .)
+    MODULO          reduce using rule 64 (path_part -> SLASH ID path_part .)
+    EQUALS          reduce using rule 64 (path_part -> SLASH ID path_part .)
+    LE              reduce using rule 64 (path_part -> SLASH ID path_part .)
+    GE              reduce using rule 64 (path_part -> SLASH ID path_part .)
+    LT              reduce using rule 64 (path_part -> SLASH ID path_part .)
+    GT              reduce using rule 64 (path_part -> SLASH ID path_part .)
+    NE              reduce using rule 64 (path_part -> SLASH ID path_part .)
+    AMPERSAND       reduce using rule 64 (path_part -> SLASH ID path_part .)
+    AMPERSOR        reduce using rule 64 (path_part -> SLASH ID path_part .)
+    UNNAMED         reduce using rule 64 (path_part -> SLASH ID path_part .)
+    TEMPLATE        reduce using rule 64 (path_part -> SLASH ID path_part .)
+    ID              reduce using rule 64 (path_part -> SLASH ID path_part .)
+    $end            reduce using rule 64 (path_part -> SLASH ID path_part .)
+    RPAREN          reduce using rule 64 (path_part -> SLASH ID path_part .)
+    INT             reduce using rule 64 (path_part -> SLASH ID path_part .)
+    STR             reduce using rule 64 (path_part -> SLASH ID path_part .)
+    RBRACKET        reduce using rule 64 (path_part -> SLASH ID path_part .)
+    COMMA           reduce using rule 64 (path_part -> SLASH ID path_part .)
+
+
+state 110
+
+    (53) member -> var EQUALS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    RPAREN          reduce using rule 53 (member -> var EQUALS expression .)
+    ID              reduce using rule 53 (member -> var EQUALS expression .)
+    INT             reduce using rule 53 (member -> var EQUALS expression .)
+    STR             reduce using rule 53 (member -> var EQUALS expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+    EQUALS          shift and go to state 50
+    LE              shift and go to state 51
+    GE              shift and go to state 52
+    LT              shift and go to state 53
+    GT              shift and go to state 54
+    NE              shift and go to state 55
+    AMPERSAND       shift and go to state 56
+    AMPERSOR        shift and go to state 57
+
+
+state 111
+
+    (58) para_list -> para_list COMMA para .
+
+    RBRACKET        reduce using rule 58 (para_list -> para_list COMMA para .)
+    COMMA           reduce using rule 58 (para_list -> para_list COMMA para .)
+
+
+state 112
+
+    (59) para -> var COLON type .
+    (60) para -> var COLON type . EQUALS expression
+
+    RBRACKET        reduce using rule 59 (para -> var COLON type .)
+    COMMA           reduce using rule 59 (para -> var COLON type .)
+    EQUALS          shift and go to state 115
+
+
+state 113
+
+    (42) term_pair -> LPAREN term COMMA term RPAREN .
+
+    PLUS            reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    MINUS           reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    TIMES           reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    DIVIDE          reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    MODULO          reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    EQUALS          reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    LE              reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    GE              reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    LT              reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    GT              reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    NE              reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    AMPERSAND       reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    AMPERSOR        reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    UNNAMED         reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    TEMPLATE        reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    ID              reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    $end            reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    RPAREN          reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    INT             reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    STR             reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    RBRACKET        reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+    COMMA           reduce using rule 42 (term_pair -> LPAREN term COMMA term RPAREN .)
+
+
+state 114
+
+    (46) term_map_content -> term_map_content term_pair COMMA .
+
+    RBRACKET        reduce using rule 46 (term_map_content -> term_map_content term_pair COMMA .)
+    LPAREN          reduce using rule 46 (term_map_content -> term_map_content term_pair COMMA .)
+
+
+state 115
+
+    (60) para -> var COLON type EQUALS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression MODULO expression
+    (15) expression -> . expression EQUALS expression
+    (16) expression -> . expression LE expression
+    (17) expression -> . expression GE expression
+    (18) expression -> . expression LT expression
+    (19) expression -> . expression GT expression
+    (20) expression -> . expression NE expression
+    (21) expression -> . expression AMPERSAND expression
+    (22) expression -> . expression AMPERSOR expression
+    (23) expression -> . MINUS expression
+    (24) expression -> . term
+    (25) term -> . NUMBER
+    (26) term -> . HEX_NUMBER
+    (27) term -> . FLOAT
+    (28) term -> . STR
+    (29) term -> . BOOLEAN
+    (30) term -> . term_vector
+    (31) term -> . term_pair
+    (32) term -> . term_map
+    (33) term -> . term_path
+    (34) term -> . term_object
+    (35) term -> . term_template
+    (36) term -> . var
+    (38) term_vector -> . LBRACKET RBRACKET
+    (39) term_vector -> . LBRACKET term_vector_content RBRACKET
+    (42) term_pair -> . LPAREN term COMMA term RPAREN
+    (43) term_map -> . MAP LBRACKET RBRACKET
+    (44) term_map -> . MAP LBRACKET term_map_content RBRACKET
+    (61) term_path -> . ID path_part
+    (62) term_path -> . DOLLAR path_part
+    (63) term_path -> . TILDE path_part
+    (50) term_object -> . type LPAREN member_list RPAREN
+    (55) term_template -> . template_name LBRACKET para_list RBRACKET
+    (37) var -> . ID
+    (47) type -> . ID
+    (48) type -> . INT
+    (49) type -> . STR
+    (56) template_name -> . ID
+
+    MINUS           shift and go to state 23
+    NUMBER          shift and go to state 25
+    HEX_NUMBER      shift and go to state 26
+    FLOAT           shift and go to state 27
+    STR             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    LBRACKET        shift and go to state 36
+    LPAREN          shift and go to state 37
+    MAP             shift and go to state 38
+    ID              shift and go to state 39
+    DOLLAR          shift and go to state 40
+    TILDE           shift and go to state 41
+    INT             shift and go to state 16
+
+    var                            shift and go to state 21
+    type                           shift and go to state 14
+    expression                     shift and go to state 116
+    term                           shift and go to state 24
+    term_vector                    shift and go to state 30
+    term_pair                      shift and go to state 31
+    term_map                       shift and go to state 32
+    term_path                      shift and go to state 33
+    term_object                    shift and go to state 34
+    term_template                  shift and go to state 35
+    template_name                  shift and go to state 19
+
+state 116
+
+    (60) para -> var COLON type EQUALS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . MODULO expression
+    (15) expression -> expression . EQUALS expression
+    (16) expression -> expression . LE expression
+    (17) expression -> expression . GE expression
+    (18) expression -> expression . LT expression
+    (19) expression -> expression . GT expression
+    (20) expression -> expression . NE expression
+    (21) expression -> expression . AMPERSAND expression
+    (22) expression -> expression . AMPERSOR expression
+
+    RBRACKET        reduce using rule 60 (para -> var COLON type EQUALS expression .)
+    COMMA           reduce using rule 60 (para -> var COLON type EQUALS expression .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+    TIMES           shift and go to state 47
+    DIVIDE          shift and go to state 48
+    MODULO          shift and go to state 49
+    EQUALS          shift and go to state 50
+    LE              shift and go to state 51
+    GE              shift and go to state 52
+    LT              shift and go to state 53
+    GT              shift and go to state 54
+    NE              shift and go to state 55
+    AMPERSAND       shift and go to state 56
+    AMPERSOR        shift and go to state 57
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 65 resolved as shift
